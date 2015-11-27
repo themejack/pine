@@ -1,0 +1,17 @@
+# OS stuff
+.DS_Store
+
+# auto generated
+#/css
+#/admin/css
+#/admin/js
+#/js/customizer.js
+#/js/customizer.min.js
+#/js/scripts.js
+#/js/scripts.min.js
+#/js/vendors.js
+#/js/vendors.min.js
+
+# node modules
+/node_modules
+npm-debug.log

@@ -1,0 +1,141 @@
+{
+    "watch": [
+        {
+            "files"    : "source/less/**/*.less",
+            "run"      : [ "less" ],
+            "target"   : "default"
+        },
+        {
+            "files"   : "source/js/scripts.js",
+            "run"     : [ "js" ],
+            "target"  : "default"
+        },
+        {
+            "files"   : [
+                "source/js/vendor/**/*.js",
+                "source/js/vendors.js"
+            ],
+            "run"     : [ "js" ],
+            "target"  : "vendors"
+        },
+        {
+            "files"   : "source/js/customizer.js",
+            "run"     : [ "js" ],
+            "target"  : "customizer"
+        },
+        {
+            "files"    : "source/admin/less/**/*.less",
+            "run"      : [ "less" ],
+            "target"   : "admin"
+        },
+        {
+            "files"    : "source/admin/js/**/*.js",
+            "run"      : [ "js" ],
+            "target"   : "admin"
+        }
+    ],
+    "less": {
+        "default": {
+            "files": {
+                "source/less/font-awesome.less": [
+                    "css/font-awesome.css",
+                    "css/font-awesome.min.css"
+                ],
+                "source/less/style.less": [
+                    "css/style.css",
+                    "css/style.min.css"
+                ],
+                "source/less/style-blue.less": [
+                    "css/style-blue.css",
+                    "css/style-blue.min.css"
+                ],
+                "source/less/style-green.less": [
+                    "css/style-green.css",
+                    "css/style-green.min.css"
+                ],
+                "source/less/style-orange.less": [
+                    "css/style-orange.css",
+                    "css/style-orange.min.css"
+                ],
+                "source/less/style-purple.less": [
+                    "css/style-purple.css",
+                    "css/style-purple.min.css"
+                ],
+                "source/less/style-yellow.less": [
+                    "css/style-yellow.css",
+                    "css/style-yellow.min.css"
+                ]
+            }
+        },
+        "admin": {
+            "files": {
+                "source/admin/less/pine-customize-control-color-scheme.less": [
+                    "admin/css/pine-customize-control-color-scheme.css",
+                    "admin/css/pine-customize-control-color-scheme.min.css"
+                ],
+                "source/admin/less/pine-customize-control-layout.less": [
+                    "admin/css/pine-customize-control-layout.css",
+                    "admin/css/pine-customize-control-layout.min.css"
+                ],
+                "source/admin/less/pine-customize-control-social-buttons.less": [
+                    "admin/css/pine-customize-control-social-buttons.css",
+                    "admin/css/pine-customize-control-social-buttons.min.css"
+                ],
+                "source/admin/less/pine-editor.less": [
+                    "admin/css/pine-editor.css",
+                    "admin/css/pine-editor.min.css"
+                ]
+            }
+        }
+    },
+    "js": {
+        "default": {
+            "files": {
+                "source/js/scripts.js": [
+                    "js/scripts.js",
+                    "js/scripts.min.js"
+                ]
+            }
+        },
+        "vendors": {
+            "files": {
+                "source/js/vendors.js": [
+                    "js/vendors.js",
+                    "js/vendors.min.js"
+                ]
+            }
+        },
+        "customizer": {
+            "files": {
+                "source/js/customizer.js": [
+                    "js/customizer.js",
+                    "js/customizer.min.js"
+                ]
+            }
+        },
+        "admin": {
+            "files": {
+                "source/admin/js/pine-customize-control-color-scheme.js": [
+                    "admin/js/pine-customize-control-color-scheme.js",
+                    "admin/js/pine-customize-control-color-scheme.min.js"
+                ],
+                "source/admin/js/pine-customize-control-layout.js": [
+                    "admin/js/pine-customize-control-layout.js",
+                    "admin/js/pine-customize-control-layout.min.js"
+                ],
+                "source/admin/js/pine-customize-control-social-buttons.js": [
+                    "admin/js/pine-customize-control-social-buttons.js",
+                    "admin/js/pine-customize-control-social-buttons.min.js"
+                ],
+                "source/admin/js/pine-less.js": [
+                    "admin/js/pine-less.js",
+                    "admin/js/pine-less.min.js"
+                ],
+                "source/admin/js/pine-tinymce.plugins.googlefonts.js": [
+                    "admin/js/pine-tinymce.plugins.googlefonts.js",
+                    "admin/js/pine-tinymce.plugins.googlefonts.min.js"
+                ]
+            }
+        }
+    }
+}
