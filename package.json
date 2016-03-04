@@ -1,0 +1,48 @@
+{
+	"name": "pine",
+	"version": "1.0.1",
+	"description": "Pine is free minimalist WordPress portfolio theme created for people who want to show their work on simple and creative way. Pine is made for a freelancers, designers or smaller agencies who are looking for elegant, professional and minimal look.",
+	"main": "gulpfile.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/themejack/pine.git"
+	},
+	"author": "Slicejack",
+	"license": "MIT",
+	"devDependencies": {
+		"autoprefixer": "^6.0.3",
+		"browserslist": "0.x.x",
+		"css-mqpacker": "^4.0.0",
+		"gulp": "3.9.x",
+		"gulp-autoprefixer": "2.x.x",
+		"gulp-include": "1.x.x",
+		"gulp-less": "3.x.x",
+		"gulp-minify-css": "1.x.x",
+		"gulp-plumber": "1.x.x",
+		"gulp-postcss": "^6.0.1",
+		"gulp-rename": "1.x.x",
+		"gulp-uglify": "1.x.x",
+		"gulp-util": "3.x.x",
+		"postcss-log-warnings": "^0.3.1"
+	},
+  "scripts": {
+		"prepare": "npm run prepare:dependencies && npm run build:all",
+		"prepare:all": "npm run prepare:dependencies && npm run build:all",
+		"prepare:dependencies": "npm install",
+		"build": "npm run build:less && npm run build:less:admin && npm run build:js && npm run build:js:vendors && npm run build:js:customizer && npm run build:js:admin",
+		"build:all": "npm run build:less && npm run build:less:admin && npm run build:js && npm run build:js:vendors && npm run build:js:customizer && npm run build:js:admin",
+		"build:less": "node ./node_modules/gulp/bin/gulp.js less --target=default",
+		"build:less:admin": "node ./node_modules/gulp/bin/gulp.js less --target=admin",
+		"build:js": "node ./node_modules/gulp/bin/gulp.js js",
+		"build:js:default": "node ./node_modules/gulp/bin/gulp.js js --target=default",
+		"build:js:vendors": "node ./node_modules/gulp/bin/gulp.js js --target=vendors",
+		"build:js:customizer": "node ./node_modules/gulp/bin/gulp.js js --target=customizer",
+		"build:js:admin": "node ./node_modules/gulp/bin/gulp.js js --target=admin",
+		"gulp": "node ./node_modules/gulp/bin/gulp.js default",
+		"gulp:default": "node ./node_modules/gulp/bin/gulp.js default",
+		"gulp:watch": "node ./node_modules/gulp/bin/gulp.js watch"
+	}
+}

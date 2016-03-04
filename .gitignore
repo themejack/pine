@@ -1,11 +1,13 @@
 # OS stuff
 .DS_Store
 
-# Development files
-/source
-gulpfile.js
-gulpconfig.json
-package.json
+# auto generated
+/css
+/admin/css
+/admin/js
+/js/customizer.js
+/js/scripts.js
+/js/vendors.js
 
 # node modules
 /node_modules
