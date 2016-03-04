@@ -15,6 +15,7 @@
 class Pine_Layout_Control extends WP_Customize_Control {
 	/**
 	 * Type variable
+	 *
 	 * @access public
 	 * @var string
 	 */
@@ -22,6 +23,7 @@ class Pine_Layout_Control extends WP_Customize_Control {
 
 	/**
 	 * Layouts variable
+	 *
 	 * @access public
 	 * @var array
 	 */
@@ -48,8 +50,8 @@ class Pine_Layout_Control extends WP_Customize_Control {
 	 * @since 1.0
 	 */
 	public function enqueue() {
-		wp_enqueue_style( 'customize-control-layout' );
-		wp_enqueue_script( 'customize-control-layout' );
+		wp_enqueue_style( 'pine-customize-control-layout' );
+		wp_enqueue_script( 'pine-customize-control-layout' );
 	}
 
 	/**
@@ -115,6 +117,7 @@ class Pine_Layout_Control extends WP_Customize_Control {
 class Pine_Color_Scheme_Control extends WP_Customize_Control {
 	/**
 	 * Type variable
+	 *
 	 * @access public
 	 * @var string
 	 */
@@ -122,6 +125,7 @@ class Pine_Color_Scheme_Control extends WP_Customize_Control {
 
 	/**
 	 * Schemes variable
+	 *
 	 * @access public
 	 * @var array
 	 */
@@ -148,8 +152,8 @@ class Pine_Color_Scheme_Control extends WP_Customize_Control {
 	 * @since 1.0
 	 */
 	public function enqueue() {
-		wp_enqueue_style( 'customize-control-color-scheme' );
-		wp_enqueue_script( 'customize-control-color-scheme' );
+		wp_enqueue_style( 'pine-customize-control-color-scheme' );
+		wp_enqueue_script( 'pine-customize-control-color-scheme' );
 	}
 
 	/**
@@ -215,6 +219,7 @@ class Pine_Color_Scheme_Control extends WP_Customize_Control {
 class Pine_Social_Buttons_Control extends WP_Customize_Control {
 	/**
 	 * Type variable
+	 *
 	 * @access public
 	 * @var string
 	 */
@@ -222,6 +227,7 @@ class Pine_Social_Buttons_Control extends WP_Customize_Control {
 
 	/**
 	 * Socials variable
+	 *
 	 * @access public
 	 * @var array
 	 */
@@ -248,8 +254,8 @@ class Pine_Social_Buttons_Control extends WP_Customize_Control {
 	 * @since 1.0
 	 */
 	public function enqueue() {
-		wp_enqueue_style( 'customize-control-social-buttons' );
-		wp_enqueue_script( 'customize-control-social-buttons' );
+		wp_enqueue_style( 'pine-customize-control-social-buttons' );
+		wp_enqueue_script( 'pine-customize-control-social-buttons' );
 	}
 
 	/**
@@ -301,7 +307,7 @@ class Pine_Social_Buttons_Control extends WP_Customize_Control {
 						</select>
 						<br /><br />
 						<div class="custom-social"<# if ( data.social != 'custom' ) { #>  style="display: none"<# } #>>
-							<input type="text" placeholder="<?php echo esc_attr( __( 'Social Network Name', 'pine' ) ); ?>"<# if ( data.social_value ) { #> value="{{ data.social_value }}"<# } #> />
+							<input type="text" placeholder="<?php echo esc_attr( __( 'Social Network Name', 'pine' ) ); ?>"<# if ( data.css_class ) { #> value="{{ data.css_class }}"<# } #> />
 							<br /><br />
 						</div>
 						<input type="text" placeholder="<?php echo esc_attr( __( 'URL', 'pine' ) ); ?>" class="url"<# if ( data.url ) { #> value="{{ data.url }}"<# } #> />

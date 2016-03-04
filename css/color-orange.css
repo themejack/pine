@@ -1,0 +1,46 @@
+/*
+ * Orange color scheme style
+ */
+/* ----- Define colors ----- */
+/* ----- Colors ----- */
+/*
+ * Colors.LESS - Classes ready for color change
+ */
+/* ----- Links ----- */
+a {
+  color: #e67e22;
+}
+a:hover,
+a:focus {
+  color: #e67e22;
+}
+/* ----- Projects category toggle ----- */
+.projects-cat-toggle li:focus,
+.projects-cat-toggle li:hover {
+  color: #e67e22;
+}
+.projects-cat-toggle li.tabs-nav__item--active {
+  color: #e67e22;
+  border-color: #e67e22;
+}
+/* ----- Project list ----- */
+.project-block:hover .project-block__content,
+.project-block:focus .project-block__content {
+  background-color: rgba(178, 94, 20, 0.7);
+}
+/* ----- Post formats ----- */
+.mejs-container,
+.mejs-embed,
+.mejs-embed body,
+.mejs-container .mejs-controls {
+  background: #e67e22 !important;
+}
+/* ----- Sticky post ----- */
+.sticky:after {
+  background-color: #e67e22;
+}
+/* ----- Comments ----- */
+.bypostauthor,
+.bypostauthor .comment-meta {
+  border-color: #e67e22;
+}

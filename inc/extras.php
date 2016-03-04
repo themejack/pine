@@ -90,6 +90,7 @@ function pine_get_layout() {
 
 /**
  * Main classes
+ *
  * @param  array   $classes Array of classes that will be extended.
  * @param  boolean $echo    Echo or not.
  * @return array|null       If $echo is true than nothing will be returned else if $classes variable is empty array null will be returned else array of classes will be returned.
@@ -125,6 +126,7 @@ function pine_main_classes( $classes = array(), $echo = true ) {
 
 /**
  * Sidebar classes
+ *
  * @param  array   $classes Array of classes that will be extended.
  * @param  boolean $echo    Echo or not.
  * @return array|null       If $echo is true than nothing will be returned else if $classes variable is empty array null will be returned else array of classes will be returned.
@@ -158,6 +160,7 @@ function pine_sidebar_classes( $classes = array(), $echo = true ) {
 
 /**
  * Post navigation filter
+ *
  * @param  string $output Navigation html.
  * @return string
  */
@@ -204,6 +207,7 @@ function pine_posts_pagination() {
 
 /**
  * Pine excerpt length
+ *
  * @param  int $length Current excerpt length.
  * @return int         New excerpt length.
  */
@@ -217,6 +221,7 @@ function pine_excerpt_length( $length ) {
 
 /**
  * Pine excerpt more
+ *
  * @param string $more Default WordPress excerpt more string.
  * @return string Remove [ and ] from default
  */
@@ -226,14 +231,44 @@ function pine_excerpt_more( $more ) {
 add_filter( 'excerpt_more', 'pine_excerpt_more', 999 );
 
 /**
- * Allow display and border-radius
- * @param  array $allowed_attr Allowed attributes.
- * @return array
+ * Returns true if a blog has more than 1 category.
+ *
+ * @return bool
  */
-function pine_safe_style_css( $allowed_attr ) {
-	$allowed_attr[] = 'display';
-	$allowed_attr[] = 'border-radius';
+function pine_categorized_blog() {
+	if ( false === ( $all_the_cool_cats = get_transient( 'pine_categories' ) ) ) {
+		// Create an array of all the categories that are attached to posts.
+		$all_the_cool_cats = get_categories( array(
+			'fields'     => 'ids',
+			'hide_empty' => 1,
+			// We only need to know if there is more than one category.
+			'number'     => 2,
+		) );
 
-	return $allowed_attr;
+		// Count the number of categories that are attached to the posts.
+		$all_the_cool_cats = count( $all_the_cool_cats );
+
+		set_transient( 'pine_categories', $all_the_cool_cats );
+	}
+
+	if ( $all_the_cool_cats > 1 ) {
+		// This blog has more than 1 category so pine_categorized_blog should return true.
+		return true;
+	} else {
+		// This blog has only 1 category so pine_categorized_blog should return false.
+		return false;
+	}
 }
-add_filter( 'safe_style_css', 'pine_safe_style_css', 10, 1 );
+
+/**
+ * Flush out the transients used in pine_categorized_blog.
+ */
+function pine_category_transient_flusher() {
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+	// Like, beat it. Dig?
+	delete_transient( 'pine_categories' );
+}
+add_action( 'edit_category', 'pine_category_transient_flusher' );
+add_action( 'save_post', 'pine_category_transient_flusher' );

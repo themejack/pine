@@ -12,7 +12,7 @@
  * @param  string $value String.
  * @return string        Sanitized string.
  */
-function sanitize_text_trim( $value ) {
+function pine_sanitize_text_trim( $value ) {
 	if ( empty( $value ) ) {
 		return '';
 	}
@@ -25,7 +25,7 @@ function sanitize_text_trim( $value ) {
  * @param  array $value Social buttons value.
  * @return array        Sanitized array
  */
-function sanitize_social_buttons( $value ) {
+function pine_sanitize_social_buttons( $value ) {
 	if ( ! is_array( $value ) ) {
 		return array();
 	}
@@ -34,33 +34,37 @@ function sanitize_social_buttons( $value ) {
 }
 
 /**
- * Sanitize select
+ * Pine Sanitize select
  */
-class Sanitize_Select {
+class Pine_Sanitize_Select {
 	/**
 	 * Select keys
+	 *
 	 * @var array
 	 */
 	public $keys;
 
 	/**
 	 * Default value
+	 *
 	 * @var array|string
 	 */
 	public $default_value;
 
 	/**
-	 * Sanitize Select constructor
+	 * Pine Sanitize Select constructor
+	 *
 	 * @param array  $keys          Keys that will be sanitized.
 	 * @param string $default_value Default value.
 	 */
-	public function Sanitize_Select( $keys, $default_value = '' ) {
+	public function Pine_Sanitize_Select( $keys, $default_value = '' ) {
 		$this->keys = $keys;
 		$this->default_value = $default_value;
 	}
 
 	/**
 	 * Sanitize callback
+	 *
 	 * @param  string $value Selected value.
 	 * @return string
 	 */

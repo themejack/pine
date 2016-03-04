@@ -9,7 +9,6 @@
  * @package Pine
  */
 
-global $slicejack_url;
 ?>
 
 	</div><!-- #content -->
@@ -21,10 +20,10 @@ global $slicejack_url;
 				<?php $social_icons = pine_get_social_icons();
 					$copyright_class = ! empty( $social_icons ) ? 'col-sm-6' : 'col-sm-12';
 				?>
-				<div class="<?php echo esc_attr( $copyright_class ); ?>">
+				<div class="<?php echo sanitize_html_class( $copyright_class ); ?>">
 					<h1 class="logo">
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-						<p><?php printf( '%1$s &copy; %2$s. - Created by %3$s.', esc_html( get_bloginfo( 'name' ) ), esc_html( date( 'Y' ) ), '<a href="' . esc_url( $slicejack_url ) . '" rel="designer">Slicejack</a>' ); ?></p>
+						<p><?php printf( '%1$s &copy; %2$s. - Created by %3$s.', esc_html( get_bloginfo( 'name' ) ), esc_html( date( 'Y' ) ), '<a href="http://slicejack.com" rel="designer">Slicejack</a>' ); ?></p>
 					</h1><!-- /.logo -->
 				</div><!-- /.col -->
 

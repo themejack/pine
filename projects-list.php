@@ -18,6 +18,7 @@ if ( get_query_var( 'paged' ) ) {
 
 	<?php /* Start the Loop */ ?>
 	<?php while ( have_posts() ) : the_post(); ?>
+
 	<div class="<?php if ( has_post_thumbnail() ) : ?>hero-subheader <?php endif; ?>animated fadeIn"<?php pine_thumbnail_src(); ?>>
 		<div class="container">
 			<div class="row">
@@ -34,6 +35,7 @@ if ( get_query_var( 'paged' ) ) {
 		<div class="hero-subheader__overlay"></div><!-- /.overlay -->
 		<?php endif; ?>
 	</div><!-- /.hero subheader -->
+
 	<?php endwhile; ?>
 
 	<div class="projects-list animated bounceInUp">
@@ -43,11 +45,14 @@ if ( get_query_var( 'paged' ) ) {
 					<ul class="projects-cat-toggle clearfix">
 						<li data-filter="*" class="tabs-nav__item--active"><?php esc_html_e( 'All', 'pine' ); ?></li>
 						<?php
-						$pine_types = get_terms( array( 'jetpack-portfolio-type' ) );
+						$pine_types = get_terms( apply_filters( 'pine_portfolio_terms', array( 'jetpack-portfolio-type' ) ) );
+
 						if ( ! empty( $pine_types ) && ! is_wp_error( $pine_types ) ) :
+
 							foreach ( $pine_types as $type ) : ?>
 						<li data-filter="<?php echo esc_attr( '.cat-' . $type->slug ); ?>"><?php echo esc_html( $type->name ); ?></li>
 						<?php endforeach;
+
 						endif; ?>
 					</ul><!-- /.projects cat toggle -->
 
@@ -63,10 +68,10 @@ if ( get_query_var( 'paged' ) ) {
 				<?php
 					$pine_args = array(
 						// Type Parameters.
-						'post_type' 			=> array( 'jetpack-portfolio' ),
+						'post_type' 			=> apply_filters( 'pine_portfolio_post_type', array( 'jetpack-portfolio' ) ),
 
 						// Pagination Parameters.
-						'posts_per_page' 	=> get_option( 'jetpack_portfolio_posts_per_page', get_option( 'posts_per_page', 9 ) ),
+						'posts_per_page' 	=> apply_filters( 'pine_portfolio_posts_per_page', get_option( 'jetpack_portfolio_posts_per_page', get_option( 'posts_per_page', 9 ) ) ),
 						'paged' 					=> $paged,
 
 						// Permission Parameters.
@@ -82,13 +87,18 @@ if ( get_query_var( 'paged' ) ) {
 					add_filter( 'excerpt_length', 'pine_excerpt_length', 999 );
 
 					if ( have_posts() ) :
+
 						/* Start the Loop */
-						while ( have_posts() ) :
-							the_post();
+						while ( have_posts() ) : the_post();
+
 							get_template_part( 'template-parts/content', 'portfolio-list' );
+
 						endwhile;
+
 					else :
+
 						get_template_part( 'template-parts/content', 'none' );
+
 					endif;
 
 					remove_filter( 'excerpt_length', 'pine_excerpt_length' );

@@ -29,10 +29,8 @@
 		<?php pine_posted_on(); ?>
 	<?php endif; ?>
 
-	<?php
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'pine' ),
-			'after'  => '</div>',
-		) );
-	?>
+	<?php wp_link_pages( array(
+		'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'pine' ),
+		'after'  => '</div>',
+	) ); ?>
 </article><!-- #post-## -->

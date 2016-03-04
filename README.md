@@ -78,10 +78,6 @@ In this theme we are using a default [WordPress template hierarchy](http://codex
 
 **/js/** - Theme javascript files.
 
-**/languages/** - There is a language file that you can use to translate theme on your language. About WordPress translating you can read here - [Translating WordPress](http://codex.wordpress.org/Translating_WordPress).
-
-**/source/** - Source less and javascript files.
-
 ## License
 
 All contents of this theme are licensed under the [GNU General Public License v2 or later](http://www.gnu.org/licenses/gpl-2.0.html), except Bootstrap which is licensed under the [MIT license](https://raw.githubusercontent.com/twbs/bootstrap/master/LICENSE), Isotope which is licensed under [GNU General Public License license v3](https://www.gnu.org/licenses/gpl-3.0.html), Masonry which is licensed under the [MIT license](http://desandro.mit-license.org), background-check which is licensed under the [MIT license](https://raw.githubusercontent.com/kennethcachia/background-check/master/LICENSE) and FontAwesome which is licensed under the [SIL Open Font License](http://scripts.sil.org/OFL).

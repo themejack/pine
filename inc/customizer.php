@@ -37,7 +37,7 @@ function pine_customize_register( $wp_customize ) {
 		'priority' => 29,
 	) );
 
-	$sanitize_header_choice = new Sanitize_Select( array( 'logo', 'title' ), 'title' );
+	$sanitize_header_choice = new Pine_Sanitize_Select( array( 'logo', 'title' ), 'title' );
 
 	$wp_customize->add_setting( 'pine_header', array(
 		'default' => 'title',
@@ -79,10 +79,10 @@ function pine_customize_register( $wp_customize ) {
 	$wp_customize->add_setting( 'pine_custom_style', array(
 		'default' => '',
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'sanitize_text_trim',
+		'sanitize_callback' => 'pine_sanitize_text_trim',
 	) );
 
-	$sanitize_scheme = new Sanitize_Select( array( 'red', 'blue', 'green', 'orange', 'purple', 'yellow' ), 'red' );
+	$sanitize_scheme = new Pine_Sanitize_Select( array( 'red', 'blue', 'green', 'orange', 'purple', 'yellow' ), 'red' );
 
 	$wp_customize->add_setting( 'pine_scheme', array(
 		'default' => 'red',
@@ -133,8 +133,8 @@ function pine_customize_register( $wp_customize ) {
 		'priority' => 40,
 	) );
 
-	$sanitize_global_layouts = new Sanitize_Select( array( 'none', 'left', 'right' ), 'left' );
-	$sanitize_layouts = new Sanitize_Select( array( 'disabled', 'none', 'left', 'right' ), 'disabled' );
+	$sanitize_global_layouts = new Pine_Sanitize_Select( array( 'none', 'left', 'right' ), 'left' );
+	$sanitize_layouts = new Pine_Sanitize_Select( array( 'disabled', 'none', 'left', 'right' ), 'disabled' );
 
 	$wp_customize->add_setting( 'pine_global_layout', array(
 		'default' => 'left',
@@ -375,7 +375,7 @@ function pine_customize_register( $wp_customize ) {
 			),
 		),
 		'transport' => 'postMessage',
-		'sanitize_callback' => 'sanitize_social_buttons',
+		'sanitize_callback' => 'pine_sanitize_social_buttons',
 	) );
 
 	$wp_customize->add_control( new Pine_Social_Buttons_Control( $wp_customize, 'pine_footer_social_buttons', array(
@@ -436,7 +436,7 @@ add_action( 'customize_register', 'pine_customize_register' );
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function pine_customize_preview_js() {
-	wp_enqueue_script( 'pine_lessjs', get_template_directory_uri() . '/admin/js/pine-less.min.js', array(), '2.5.1', true );
-	wp_enqueue_script( 'pine_customizer', get_template_directory_uri() . '/js/customizer.min.js', array( 'customize-preview', 'pine_lessjs' ), '20130508', true );
+	wp_enqueue_script( 'pine_lessjs', get_template_directory_uri() . '/admin/js/pine-less.js', array(), '2.5.1', true );
+	wp_enqueue_script( 'pine_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview', 'pine_lessjs' ), '20130508', true );
 }
 add_action( 'customize_preview_init', 'pine_customize_preview_js' );

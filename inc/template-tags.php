@@ -80,76 +80,35 @@ if ( ! function_exists( 'pine_entry_footer' ) ) :
 	}
 endif;
 
-/**
- * Returns true if a blog has more than 1 category.
- *
- * @return bool
- */
-function pine_categorized_blog() {
-	if ( false === ( $all_the_cool_cats = get_transient( 'pine_categories' ) ) ) {
-		// Create an array of all the categories that are attached to posts.
-		$all_the_cool_cats = get_categories( array(
-			'fields'     => 'ids',
-			'hide_empty' => 1,
-
-			// We only need to know if there is more than one category.
-			'number'     => 2,
-		) );
-
-		// Count the number of categories that are attached to the posts.
-		$all_the_cool_cats = count( $all_the_cool_cats );
-
-		set_transient( 'pine_categories', $all_the_cool_cats );
-	}
-
-	if ( $all_the_cool_cats > 1 ) {
-		// This blog has more than 1 category so pine_categorized_blog should return true.
-		return true;
-	} else {
-		// This blog has only 1 category so pine_categorized_blog should return false.
-		return false;
-	}
-}
-
-/**
- * Flush out the transients used in pine_categorized_blog.
- */
-function pine_category_transient_flusher() {
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-	// Like, beat it. Dig?
-	delete_transient( 'pine_categories' );
-}
-add_action( 'edit_category', 'pine_category_transient_flusher' );
-add_action( 'save_post',     'pine_category_transient_flusher' );
-
-/**
- * Echo hero element inline style
- * @param  string $size Size of thumbnail image.
- */
-function pine_thumbnail_src( $size = 'pine-full' ) {
-	if ( ! has_post_thumbnail() ) {
-		return;
-	}
-
-	if ( 'pine-column-full' === $size ) {
-		$layout = pine_get_layout();
-
-		if ( ! is_customize_preview() && ( 'left' === $layout || 'right' === $layout ) ) {
-			$size = 'pine-column';
+if ( ! function_exists( 'pine_thumbnail_src' ) ) :
+	/**
+	 * Echo hero element inline style
+	 *
+	 * @param  string $size Size of thumbnail image.
+	 */
+	function pine_thumbnail_src( $size = 'pine-full' ) {
+		if ( ! has_post_thumbnail() ) {
+			return;
 		}
+
+		if ( 'pine-column-full' === $size ) {
+			$layout = pine_get_layout();
+
+			if ( ! is_customize_preview() && ( 'left' === $layout || 'right' === $layout ) ) {
+				$size = 'pine-column';
+			}
+		}
+
+		$thumbnail_id = get_post_thumbnail_id();
+		$thumbnail_image = wp_get_attachment_image_src( $thumbnail_id, $size );
+
+		if ( empty( $thumbnail_image ) || ! isset( $thumbnail_image[0] ) ) {
+			return;
+		}
+
+		echo ' style="background-image: url(' . esc_url( $thumbnail_image[0] ) . ')"';
 	}
-
-	$thumbnail_id = get_post_thumbnail_id();
-	$thumbnail_image = wp_get_attachment_image_src( $thumbnail_id, $size );
-
-	if ( empty( $thumbnail_image ) || ! isset( $thumbnail_image[0] ) ) {
-		return;
-	}
-
-	echo ' style="background-image: url(' . esc_url( $thumbnail_image[0] ) . ')"';
-}
+endif;
 
 if ( ! function_exists( 'pine_logo' ) ) :
 	/**
@@ -186,12 +145,15 @@ if ( ! function_exists( 'pine_get_social_icons' ) ) :
 	 * @since 1.0
 	 */
 	function pine_get_social_icons() {
-		return get_theme_mod( 'pine_footer_social_buttons', array(
+		return get_theme_mod(
+			'pine_footer_social_buttons',
+			array(
 				array( 'social' => 'facebook', 'url' => '#', 'css_class' => 'facebook' ),
 				array( 'social' => 'twitter', 'url' => '#', 'css_class' => 'twitter' ),
 				array( 'social' => 'dribbble', 'url' => '#', 'css_class' => 'dribbble' ),
 				array( 'social' => 'github', 'url' => '#', 'css_class' => 'github' ),
-			) );
+			)
+		);
 	}
 endif;
 
@@ -244,21 +206,25 @@ if ( ! function_exists( 'pine_social_icons' ) ) :
 	}
 endif;
 
-/**
- * Do not display posts navigation if jetpack infinite scroll module is active
- */
-function pine_posts_navigation() {
-	if ( ! ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'infinite-scroll' ) ) ) {
-		the_posts_navigation();
+if ( ! function_exists( 'pine_posts_navigation' ) ) :
+	/**
+	 * Do not display posts navigation if jetpack infinite scroll module is active
+	 */
+	function pine_posts_navigation() {
+		if ( ! ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'infinite-scroll' ) ) ) {
+			the_posts_navigation();
+		}
 	}
-}
+endif;
 
-/**
- * Parse chat content
- *
- * @param string $content Post content.
- * @since 1.0
- */
-function pine_parse_chat_content( $content ) {
-	return preg_replace( '/\n?(.*)(\:)/mi', "\n<span class=\"username\">$1:</span>", $content );
-}
+if ( ! function_exists( 'pine_parse_chat_content' ) ) :
+	/**
+	 * Parse chat content
+	 *
+	 * @param string $content Post content.
+	 * @since 1.0
+	 */
+	function pine_parse_chat_content( $content ) {
+		return preg_replace( '/\n?(.*)(\:)/mi', "\n<span class=\"username\">$1:</span>", $content );
+	}
+endif;

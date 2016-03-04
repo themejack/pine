@@ -8,17 +8,21 @@
  */
 
 $post_classes = array( 'col-sm-6', 'col-md-4', 'project-block' );
-$portfolio_types = wp_get_post_terms( get_the_id(), 'jetpack-portfolio-type' );
+$portfolio_terms = apply_filters( 'pine_portfolio_terms', array( 'jetpack-portfolio-type' ) );
 
-if ( ! empty( $portfolio_types ) && ! is_wp_error( $portfolio_types ) ) {
-	foreach ( $portfolio_types as $type ) {
-		$post_classes[] = 'cat-' . $type->slug;
+foreach ( $portfolio_terms as $term ) {
+	$portfolio_types = get_the_terms( get_the_id(), $term );
+
+	if ( ! empty( $portfolio_types ) && ! is_wp_error( $portfolio_types ) ) {
+		foreach ( $portfolio_types as $type ) {
+			$post_classes[] = 'cat-' . $type->slug;
+		}
 	}
 }
 
 ?>
 
-<a href="<?php the_permalink(); ?>" id="post-<?php the_ID(); ?>" <?php post_class( $post_classes ); ?><?php pine_thumbnail_src(); ?>>
+<a href="<?php the_permalink(); ?>" id="post-<?php the_ID(); ?>" <?php post_class( $post_classes ); ?><?php pine_thumbnail_src( 'pine-project-list' ); ?>>
 	<div class="project-block__content">
 		<div class="project-block__inner">
 			<?php the_title( '<h2>', '</h2>' ); ?>

@@ -12,9 +12,9 @@ get_header(); ?>
 	<div class="error-404">
 		<div class="error-404__outer">
 			<div class="error-404__middle">
-				<h2><?php printf( wp_kses( __( "Don't fall down! <br /> Come back to %s.", 'pine' ), array( 'a' => array( 'href' => true ), 'br' => array(), 'span' => array() ) ), '<a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Homepage', 'pine' ) . '</a>' ); ?></h2>
+				<h2><?php esc_html_e( 'Don\'t fall down!', 'pine' ); ?><br /><?php printf( esc_html__( 'Come back to %s.', 'pine' ), '<a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Homepage', 'pine' ) . '</a>' ); ?></h2>
 
-				<p><?php echo wp_kses( __( "It's looking like you may have taken a wrong turn. <br /> Don't worry, it happens to the best of us.", 'pine' ), array( 'a' => array( 'href' => true ), 'br' => array(), 'span' => array() ) ); ?></p>
+				<p><?php esc_html_e( 'It\'s looking like you may have taken a wrong turn.', 'pine' ); ?><br /><?php esc_html_e( 'Don\'t worry, it happens to the best of us.', 'pine' ); ?></p>
 			</div><!-- /.middle -->
 		</div><!-- /.outer -->
 

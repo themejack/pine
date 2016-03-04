@@ -7,8 +7,6 @@
  * @package Pine
  */
 
-$slicejack_url = 'http://slicejack.com';
-
 if ( ! function_exists( 'pine_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -48,7 +46,7 @@ if ( ! function_exists( 'pine_setup' ) ) :
 		 * Register new image sizes
 		 */
 		add_image_size( 'pine-full', 1600, 500, true );
-		add_image_size( 'project-list', 1140, 500, true );
+		add_image_size( 'pine-project-list', 1140, 500, true );
 		add_image_size( 'pine-column-full', 1140, 400, true );
 		add_image_size( 'pine-column', 750, 400, true );
 
@@ -126,14 +124,12 @@ add_action( 'widgets_init', 'pine_widgets_init' );
  * @since 1.0
  */
 function pine_admin_scripts() {
-	wp_register_style( 'customize-control-color-scheme', get_template_directory_uri() . '/admin/css/pine-customize-control-color-scheme.min.css', array( 'customize-controls' ), '20150610', 'all' );
-	wp_register_script( 'customize-control-color-scheme', get_template_directory_uri() . '/admin/js/pine-customize-control-color-scheme.min.js', array( 'customize-controls', 'jquery' ), '20150610', true );
-	wp_register_style( 'customize-control-social-buttons', get_template_directory_uri() . '/admin/css/pine-customize-control-social-buttons.min.css', array( 'customize-controls' ), '20150610', 'all' );
-	wp_register_script( 'customize-control-social-buttons', get_template_directory_uri() . '/admin/js/pine-customize-control-social-buttons.min.js', array( 'customize-controls', 'jquery' ), '20150610', true );
-	wp_register_style( 'customize-control-layout', get_template_directory_uri() . '/admin/css/pine-customize-control-layout.min.css', array( 'customize-controls' ), '20150610', 'all' );
-	wp_register_script( 'customize-control-layout', get_template_directory_uri() . '/admin/js/pine-customize-control-layout.min.js', array( 'customize-controls', 'jquery' ), '20140806', true );
-	wp_register_style( 'customize-control-sharrre-social-buttons', get_template_directory_uri() . '/admin/css/pine-customize-control-sharrre-social-buttons.min.css', array( 'customize-controls' ), '20150610', 'all' );
-	wp_register_script( 'customize-control-sharrre-social-buttons', get_template_directory_uri() . '/admin/js/pine-customize-control-sharrre-social-buttons.min.js', array( 'customize-controls', 'jquery' ), '20150610', true );
+	wp_register_style( 'pine-customize-control-color-scheme', get_template_directory_uri() . '/admin/css/pine-customize-control-color-scheme.css', array( 'customize-controls' ), '20150610', 'all' );
+	wp_register_script( 'pine-customize-control-color-scheme', get_template_directory_uri() . '/admin/js/pine-customize-control-color-scheme.js', array( 'customize-controls', 'jquery' ), '20150610', true );
+	wp_register_style( 'pine-customize-control-social-buttons', get_template_directory_uri() . '/admin/css/pine-customize-control-social-buttons.css', array( 'customize-controls' ), '20150610', 'all' );
+	wp_register_script( 'pine-customize-control-social-buttons', get_template_directory_uri() . '/admin/js/pine-customize-control-social-buttons.js', array( 'customize-controls', 'jquery' ), '20150610', true );
+	wp_register_style( 'pine-customize-control-layout', get_template_directory_uri() . '/admin/css/pine-customize-control-layout.css', array( 'customize-controls' ), '20150610', 'all' );
+	wp_register_script( 'pine-customize-control-layout', get_template_directory_uri() . '/admin/js/pine-customize-control-layout.js', array( 'customize-controls', 'jquery' ), '20140806', true );
 }
 add_action( 'admin_enqueue_scripts', 'pine_admin_scripts' );
 
@@ -141,7 +137,7 @@ add_action( 'admin_enqueue_scripts', 'pine_admin_scripts' );
  * Add editor styles
  */
 function pine_add_editor_styles() {
-	add_editor_style( get_template_directory_uri() . '/admin/css/pine-editor.min.css' );
+	add_editor_style( get_template_directory_uri() . '/admin/css/pine-editor.css' );
 }
 add_action( 'admin_init', 'pine_add_editor_styles' );
 
@@ -152,7 +148,7 @@ add_action( 'admin_init', 'pine_add_editor_styles' );
  * @return array $plugins
  */
 function pine_add_tinymce_googlefonts( $plugins ) {
-	$plugins['pine_googlefonts'] = get_template_directory_uri() . '/admin/js/pine-tinymce.plugins.googlefonts.min.js';
+	$plugins['pine_googlefonts'] = get_template_directory_uri() . '/admin/js/pine-tinymce.plugins.googlefonts.js';
 	return $plugins;
 
 }
@@ -162,27 +158,28 @@ add_filter( 'mce_external_plugins', 'pine_add_tinymce_googlefonts' );
  * Enqueue scripts and styles.
  */
 function pine_scripts() {
-	$styles = array(
-		'red' => '',
-		'blue' => '-blue',
-		'green' => '-green',
-		'orange' => '-orange',
-		'purple' => '-purple',
-		'yellow' => '-yellow',
-	);
+	// Default style.
+	wp_enqueue_style( 'pine-style', get_template_directory_uri() . '/css/style.css', array(), '20160303' );
 
-	$theme_style = get_theme_mod( 'pine_scheme', 'red' );
-	if ( ! array_key_exists( $theme_style, $styles ) ) {
-		$theme_style = 'red';
+	// Colors.
+	wp_register_style( 'pine-style-color-blue', get_template_directory_uri() . '/css/color-blue.css', array( 'pine-style' ), '20160303' );
+	wp_register_style( 'pine-style-color-green', get_template_directory_uri() . '/css/color-green.css', array( 'pine-style' ), '20160303' );
+	wp_register_style( 'pine-style-color-orange', get_template_directory_uri() . '/css/color-orange.css', array( 'pine-style' ), '20160303' );
+	wp_register_style( 'pine-style-color-purple', get_template_directory_uri() . '/css/color-purple.css', array( 'pine-style' ), '20160303' );
+	wp_register_style( 'pine-style-color-yellow', get_template_directory_uri() . '/css/color-yellow.css', array( 'pine-style' ), '20160303' );
+
+	// Enqueue choosen color scheme.
+	$colors = array( 'blue', 'green', 'orange', 'purple', 'yellow' );
+	$scheme = get_theme_mod( 'pine_scheme', 'red' );
+	if ( in_array( $scheme, $colors ) ) {
+		wp_enqueue_style( 'pine-style-color-' . $scheme );
 	}
 
-	wp_enqueue_style( 'pine-style', get_template_directory_uri() . '/css/style' . $styles[ $theme_style ] . '.min.css' );
+	// Scripts.
+	wp_enqueue_script( 'pine-vendors', get_template_directory_uri() . '/js/vendors.js', array(), '20150903', true );
+	wp_enqueue_script( 'pine-scripts', get_template_directory_uri() . '/js/scripts.js', array( 'pine-vendors', 'jquery' ), '20150903', true );
 
-	wp_enqueue_script( 'pine-vendors', get_template_directory_uri() . '/js/vendors.min.js', array(), '20150903', true );
-	wp_enqueue_script( 'pine-scripts', get_template_directory_uri() . '/js/scripts.min.js', array( 'pine-vendors', 'jquery' ), '20150903', true );
-
-	wp_enqueue_script( 'pine-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
-
+	// Comments script.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -212,7 +209,7 @@ function pine_footer() {
 			},
 			custom: {
 				families: [ 'FontAwesome' ],
-				urls: [ '<?php echo esc_url( get_template_directory_uri() . '/css/font-awesome.min.css' ); ?>' ],
+				urls: [ '<?php echo esc_url( get_template_directory_uri() . '/css/font-awesome.css' ); ?>' ],
 				testStrings: {
 					'FontAwesome': '\uf083\uf015'
 				}
@@ -220,7 +217,7 @@ function pine_footer() {
 		};
 		( function() {
 			var wf = document.createElement('script');
-			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.jsdelivr.net/webfontloader/1.6.15/webfontloader.js';
 			wf.type = 'text/javascript';
 			wf.async = 'true';
 			var s = document.getElementsByTagName('script')[0];
@@ -240,7 +237,7 @@ function pine_customizer_footer() {
 		WebFontConfig = {
 			custom: {
 				families: [ 'FontAwesome' ],
-				urls: [ '<?php echo esc_url( get_template_directory_uri() . '/css/font-awesome.min.css' ); ?>' ],
+				urls: [ '<?php echo esc_url( get_template_directory_uri() . '/css/font-awesome.css' ); ?>' ],
 				testStrings: {
 					'FontAwesome': '\uf083\uf015'
 				}
@@ -248,7 +245,7 @@ function pine_customizer_footer() {
 		};
 		( function() {
 			var wf = document.createElement('script');
-			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.jsdelivr.net/webfontloader/1.6.15/webfontloader.js';
 			wf.type = 'text/javascript';
 			wf.async = 'true';
 			var s = document.getElementsByTagName('script')[0];
@@ -278,8 +275,3 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
-
-/**
- * Load dashboard widgets.
- */
-require get_template_directory() . '/inc/dashboard.php';
