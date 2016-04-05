@@ -112,9 +112,6 @@
                 ],
                 "source/admin/js/pine-less.js": [
                     "admin/js/pine-less.js"
-                ],
-                "source/admin/js/pine-tinymce.plugins.googlefonts.js": [
-                    "admin/js/pine-tinymce.plugins.googlefonts.js"
                 ]
             }
         }

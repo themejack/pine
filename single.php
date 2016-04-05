@@ -47,7 +47,7 @@ get_header(); ?>
 	</div><!-- /.container -->
 
 	<?php if ( in_array( get_post_type(), apply_filters( 'pine_portfolio_post_type', array( 'jetpack-portfolio' ) ) ) ) : ?>
-	<div class="container">
+	<div class="container project-back-container">
 		<div class="row">
 			<div class="col-lg-12">
 				<a class="project-back-btn" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Back to homepage', 'pine' ); ?></a>
@@ -58,4 +58,4 @@ get_header(); ?>
 
 <?php endwhile; ?>
 
-<?php get_footer(); ?>
+<?php get_footer();

@@ -17,4 +17,3 @@
 	) ); ?>
 	<?php edit_post_link( esc_html__( 'Edit', 'pine' ), '<span class="edit-link">', '</span>' ); ?>
 </article><!-- #post-## -->
-
