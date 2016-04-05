@@ -23,7 +23,7 @@
 				<div class="<?php echo sanitize_html_class( $copyright_class ); ?>">
 					<h1 class="logo">
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-						<p><?php printf( '%1$s &copy; %2$s. - Created by %3$s.', esc_html( get_bloginfo( 'name' ) ), esc_html( date( 'Y' ) ), '<a href="http://slicejack.com" rel="designer">Slicejack</a>' ); ?></p>
+						<p><?php printf( esc_html__( '%1$s &copy; %2$s. - Created by %3$s.', 'pine' ), esc_html( get_bloginfo( 'name' ) ), esc_html( date( 'Y' ) ), '<a href="http://slicejack.com" rel="designer">Slicejack</a>' ); ?></p>
 					</h1><!-- /.logo -->
 				</div><!-- /.col -->
 

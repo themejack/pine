@@ -117,7 +117,7 @@ if ( ! function_exists( 'pine_logo' ) ) :
 	function pine_logo() {
 		$pine_header = get_theme_mod( 'pine_header', 'title' );
 
-		$pine_header_logo_default = get_template_directory_uri() . '/img/content/themejack.png';
+		$pine_header_logo_default = get_template_directory_uri() . '/img/content/portfolio.jpg';
 		$pine_header_logo = get_theme_mod( 'pine_header_logo' );
 		if ( empty( $pine_header_logo ) ) {
 			$pine_header_logo = $pine_header_logo_default;

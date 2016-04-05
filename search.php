@@ -53,4 +53,4 @@ get_header(); ?>
 		</div><!-- /.row -->
 	</div><!-- /.container -->
 
-<?php get_footer(); ?>
+<?php get_footer();

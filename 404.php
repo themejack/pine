@@ -21,4 +21,4 @@ get_header(); ?>
 		<div class="error-404__overlay"></div><!-- /.overlay -->
 	</div><!-- /.error 404 -->
 
-<?php get_footer(); ?>
+<?php get_footer();

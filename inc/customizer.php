@@ -17,25 +17,9 @@ function pine_customize_register( $wp_customize ) {
 	require get_template_directory() . '/inc/customizer-functions.php'; // Extra functions.
 	require get_template_directory() . '/inc/customizer-controls.php'; // Extra controls.
 
-	// Remove Site title & tagline section.
-	$wp_customize->remove_section( 'title_tagline' );
-
 	// Change site title and tagline controls transport to postMessage.
 	$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-
-	// Move site title and tagline controls to header section.
-	$wp_customize->get_control( 'blogname' )->section = 'header';
-	$wp_customize->get_control( 'blogdescription' )->section = 'header';
-
-	// Remove preexisting controls.
-	$wp_customize->remove_control( 'header_textcolor' );
-
-	/* -------		Header 		------- */
-	$wp_customize->add_section( 'header', array(
-		'title' => __( 'Header', 'pine' ),
-		'priority' => 29,
-	) );
 
 	$sanitize_header_choice = new Pine_Sanitize_Select( array( 'logo', 'title' ), 'title' );
 
@@ -47,7 +31,7 @@ function pine_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control( 'pine_header', array(
 		'label' => __( 'Display', 'pine' ),
-		'section' => 'header',
+		'section' => 'title_tagline',
 		'type' => 'select',
 		'choices' => array(
 			'logo' => __( 'Logo', 'pine' ),
@@ -56,14 +40,14 @@ function pine_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_setting( 'pine_header_logo', array(
-		'default' => get_template_directory_uri() . '/img/content/themejack.png',
+		'default' => get_template_directory_uri() . '/img/content/portfolio.jpg',
 		'transport' => 'postMessage',
 		'sanitize_callback' => 'esc_url_raw',
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'pine_header_logo', array(
 		'label' => __( 'Upload a logo', 'pine' ),
-		'section' => 'header',
+		'section' => 'title_tagline',
 	) ) );
 
 	$sections = $wp_customize->sections();
@@ -426,9 +410,6 @@ function pine_customize_register( $wp_customize ) {
 		),
 		'section' => 'footer',
 	) ) );
-
-	/* -------		Front 	 		------- */
-	$wp_customize->get_section( 'static_front_page' )->title = __( 'Front Page', 'pine' );
 }
 add_action( 'customize_register', 'pine_customize_register' );
 

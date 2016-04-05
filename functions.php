@@ -79,11 +79,8 @@ if ( ! function_exists( 'pine_setup' ) ) :
 			'link',
 		) );
 
-		// Set up the WordPress core custom background feature.
-		add_theme_support( 'custom-background', apply_filters( 'pine_custom_background_args', array(
-			'default-color' => 'ffffff',
-			'default-image' => '',
-		) ) );
+		// Add editor style.
+		add_editor_style( get_template_directory_uri() . '/admin/css/pine-editor.css' );
 	}
 endif; // End pine_setup.
 add_action( 'after_setup_theme', 'pine_setup' );
@@ -134,32 +131,14 @@ function pine_admin_scripts() {
 add_action( 'admin_enqueue_scripts', 'pine_admin_scripts' );
 
 /**
- * Add editor styles
- */
-function pine_add_editor_styles() {
-	add_editor_style( get_template_directory_uri() . '/admin/css/pine-editor.css' );
-}
-add_action( 'admin_init', 'pine_add_editor_styles' );
-
-/**
- * Add TinyMCE google fonts plugin
- *
- * @param array $plugins TinyMCE plugins.
- * @return array $plugins
- */
-function pine_add_tinymce_googlefonts( $plugins ) {
-	$plugins['pine_googlefonts'] = get_template_directory_uri() . '/admin/js/pine-tinymce.plugins.googlefonts.js';
-	return $plugins;
-
-}
-add_filter( 'mce_external_plugins', 'pine_add_tinymce_googlefonts' );
-
-/**
  * Enqueue scripts and styles.
  */
 function pine_scripts() {
+	// Fonts.
+	wp_enqueue_style( 'pine-fonts', '//fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic,900,900italic' );
+
 	// Default style.
-	wp_enqueue_style( 'pine-style', get_template_directory_uri() . '/css/style.css', array(), '20160303' );
+	wp_enqueue_style( 'pine-style', get_template_directory_uri() . '/css/style.css', array( 'pine-fonts' ), '20160303' );
 
 	// Colors.
 	wp_register_style( 'pine-style-color-blue', get_template_directory_uri() . '/css/color-blue.css', array( 'pine-style' ), '20160303' );
@@ -196,65 +175,6 @@ function pine_custom_style() {
 	endif;
 }
 add_action( 'wp_head', 'pine_custom_style', 9999 );
-
-/**
- * Print into footer
- */
-function pine_footer() {
-	?>
-	<script type="text/javascript">
-		WebFontConfig = {
-			google: {
-				families: [ 'Lato:400,300,300italic,400italic,700,700italic,900,900italic:latin' ]
-			},
-			custom: {
-				families: [ 'FontAwesome' ],
-				urls: [ '<?php echo esc_url( get_template_directory_uri() . '/css/font-awesome.css' ); ?>' ],
-				testStrings: {
-					'FontAwesome': '\uf083\uf015'
-				}
-			}
-		};
-		( function() {
-			var wf = document.createElement('script');
-			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.jsdelivr.net/webfontloader/1.6.15/webfontloader.js';
-			wf.type = 'text/javascript';
-			wf.async = 'true';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(wf, s);
-		} () );
-	</script>
-	<?php
-}
-add_action( 'wp_footer', 'pine_footer' );
-
-/**
- * Print into customizer footer
- */
-function pine_customizer_footer() {
-	?>
-	<script type="text/javascript">
-		WebFontConfig = {
-			custom: {
-				families: [ 'FontAwesome' ],
-				urls: [ '<?php echo esc_url( get_template_directory_uri() . '/css/font-awesome.css' ); ?>' ],
-				testStrings: {
-					'FontAwesome': '\uf083\uf015'
-				}
-			}
-		};
-		( function() {
-			var wf = document.createElement('script');
-			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.jsdelivr.net/webfontloader/1.6.15/webfontloader.js';
-			wf.type = 'text/javascript';
-			wf.async = 'true';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(wf, s);
-		} () );
-	</script>
-	<?php
-}
-add_action( 'customize_controls_print_footer_scripts', 'pine_customizer_footer' );
 
 /**
  * Custom template tags for this theme.

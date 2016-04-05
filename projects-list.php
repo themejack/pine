@@ -39,30 +39,34 @@ if ( get_query_var( 'paged' ) ) {
 	<?php endwhile; ?>
 
 	<div class="projects-list animated bounceInUp">
+		<div class="projects-list-options">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="projects-cat-toggle clearfix">
+							<li data-filter="*" class="tabs-nav__item--active"><?php esc_html_e( 'All', 'pine' ); ?></li>
+							<?php
+							$pine_types = get_terms( apply_filters( 'pine_portfolio_terms', array( 'jetpack-portfolio-type' ) ) );
+
+							if ( ! empty( $pine_types ) && ! is_wp_error( $pine_types ) ) :
+
+								foreach ( $pine_types as $type ) : ?>
+							<li data-filter="<?php echo esc_attr( '.cat-' . $type->slug ); ?>"><?php echo esc_html( $type->name ); ?></li>
+							<?php endforeach;
+
+							endif; ?>
+						</ul><!-- /.projects cat toggle -->
+
+						<ul class="projects-type-nav hidden-xs hidden-sm">
+							<li class="projects-type-nav__item--active project-type-nav__grid"><i class="fa fa-th-large"></i></li>
+							<li class="project-type-nav__list"><i class="fa fa-list-ul"></i></li>
+						</ul><!-- /.projects type nav -->
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div>
+		</div>
+
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<ul class="projects-cat-toggle clearfix">
-						<li data-filter="*" class="tabs-nav__item--active"><?php esc_html_e( 'All', 'pine' ); ?></li>
-						<?php
-						$pine_types = get_terms( apply_filters( 'pine_portfolio_terms', array( 'jetpack-portfolio-type' ) ) );
-
-						if ( ! empty( $pine_types ) && ! is_wp_error( $pine_types ) ) :
-
-							foreach ( $pine_types as $type ) : ?>
-						<li data-filter="<?php echo esc_attr( '.cat-' . $type->slug ); ?>"><?php echo esc_html( $type->name ); ?></li>
-						<?php endforeach;
-
-						endif; ?>
-					</ul><!-- /.projects cat toggle -->
-
-					<ul class="projects-type-nav hidden-xs hidden-sm">
-						<li class="projects-type-nav__item--active project-type-nav__grid"><i class="fa fa-th-large"></i></li>
-						<li class="project-type-nav__list"><i class="fa fa-list-ul"></i></li>
-					</ul><!-- /.projects type nav -->
-				</div><!-- /.col -->
-			</div><!-- /.row -->
-
 			<div class="projects-block__list">
 				<div class="col-lg-12" id="main">
 				<?php
@@ -117,5 +121,4 @@ if ( get_query_var( 'paged' ) ) {
 
 	<?php wp_reset_postdata(); ?>
 
-<?php
-get_footer();
+<?php get_footer();
