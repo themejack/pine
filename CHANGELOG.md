@@ -2,6 +2,39 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.6] - 2016-04-27
+### Added
+- Theme admin page
+
+### Changed
+- Theme logo replaced with custom logo support
+
+### Fixed
+- Project list hero block (thanks @racheljcox)
+- Page hero block
+
+## [1.0.5] - 2016-04-11
+### Changed
+- Remove registration of color schemes styles
+
+## [1.0.4] - 2016-04-07
+### Added
+- Inline docs for filters
+
+### Changed
+- Rename pine_portfolio_terms filter to pine_portfolio_taxonomy
+- Remove registration of customize controls styles and scripts
+
+### Removed
+- Remove searchform HTML5 support. Theme already have searchform.php file.
+
+## [1.0.3] - 2016-03-08
+### Changed
+- Fonts are loaded trough wp_enqueue_style.
+- Change theme url
+- Replace default logo with generic logo
+- Fix file endings on php files
+
 ## [1.0.2] - 2016-03-07
 ### Added
 - Images source and licence informations.

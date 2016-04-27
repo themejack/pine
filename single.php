@@ -46,7 +46,7 @@ get_header(); ?>
 		</div><!-- /.row -->
 	</div><!-- /.container -->
 
-	<?php if ( in_array( get_post_type(), apply_filters( 'pine_portfolio_post_type', array( 'jetpack-portfolio' ) ) ) ) : ?>
+	<?php if ( in_array( get_post_type(), pine_get_portfolio_post_type() ) ) : ?>
 	<div class="container project-back-container">
 		<div class="row">
 			<div class="col-lg-12">
