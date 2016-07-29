@@ -50,6 +50,19 @@ if ( ! function_exists( 'pine_setup' ) ) :
 		add_image_size( 'pine-column-full', 1140, 400, true );
 		add_image_size( 'pine-column', 750, 400, true );
 
+		/**
+		 * Enable support for Theme Logo
+		 *
+		 * @link http://codex.wordpress.org/Theme_Logo
+		 */
+		add_theme_support( 'custom-logo', array(
+			'height'      => 500,
+			'width'       => 500,
+			'flex-height' => true,
+			'flex-width'  => true,
+			'header-text' => array( 'site-title', 'site-description' ),
+		) );
+
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'primary' => esc_html__( 'Primary Menu', 'pine' ),
@@ -60,7 +73,6 @@ if ( ! function_exists( 'pine_setup' ) ) :
 		 * to output valid HTML5.
 		 */
 		add_theme_support( 'html5', array(
-			'search-form',
 			'comment-form',
 			'comment-list',
 			'gallery',
@@ -93,7 +105,13 @@ add_action( 'after_setup_theme', 'pine_setup' );
  * @global int $content_width
  */
 function pine_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'pine_content_width', 1140 );
+	$pine_content_width = 1140;
+	/**
+	 * Filter content width
+	 *
+	 * @param integer $pine_content_width Default content width.
+	 */
+	$GLOBALS['content_width'] = (int) apply_filters( 'pine_content_width', $pine_content_width );
 }
 add_action( 'after_setup_theme', 'pine_content_width', 0 );
 
@@ -116,21 +134,6 @@ function pine_widgets_init() {
 add_action( 'widgets_init', 'pine_widgets_init' );
 
 /**
- * Enqueue admin scripts and styles.
- *
- * @since 1.0
- */
-function pine_admin_scripts() {
-	wp_register_style( 'pine-customize-control-color-scheme', get_template_directory_uri() . '/admin/css/pine-customize-control-color-scheme.css', array( 'customize-controls' ), '20150610', 'all' );
-	wp_register_script( 'pine-customize-control-color-scheme', get_template_directory_uri() . '/admin/js/pine-customize-control-color-scheme.js', array( 'customize-controls', 'jquery' ), '20150610', true );
-	wp_register_style( 'pine-customize-control-social-buttons', get_template_directory_uri() . '/admin/css/pine-customize-control-social-buttons.css', array( 'customize-controls' ), '20150610', 'all' );
-	wp_register_script( 'pine-customize-control-social-buttons', get_template_directory_uri() . '/admin/js/pine-customize-control-social-buttons.js', array( 'customize-controls', 'jquery' ), '20150610', true );
-	wp_register_style( 'pine-customize-control-layout', get_template_directory_uri() . '/admin/css/pine-customize-control-layout.css', array( 'customize-controls' ), '20150610', 'all' );
-	wp_register_script( 'pine-customize-control-layout', get_template_directory_uri() . '/admin/js/pine-customize-control-layout.js', array( 'customize-controls', 'jquery' ), '20140806', true );
-}
-add_action( 'admin_enqueue_scripts', 'pine_admin_scripts' );
-
-/**
  * Enqueue scripts and styles.
  */
 function pine_scripts() {
@@ -140,18 +143,11 @@ function pine_scripts() {
 	// Default style.
 	wp_enqueue_style( 'pine-style', get_template_directory_uri() . '/css/style.css', array( 'pine-fonts' ), '20160303' );
 
-	// Colors.
-	wp_register_style( 'pine-style-color-blue', get_template_directory_uri() . '/css/color-blue.css', array( 'pine-style' ), '20160303' );
-	wp_register_style( 'pine-style-color-green', get_template_directory_uri() . '/css/color-green.css', array( 'pine-style' ), '20160303' );
-	wp_register_style( 'pine-style-color-orange', get_template_directory_uri() . '/css/color-orange.css', array( 'pine-style' ), '20160303' );
-	wp_register_style( 'pine-style-color-purple', get_template_directory_uri() . '/css/color-purple.css', array( 'pine-style' ), '20160303' );
-	wp_register_style( 'pine-style-color-yellow', get_template_directory_uri() . '/css/color-yellow.css', array( 'pine-style' ), '20160303' );
-
 	// Enqueue choosen color scheme.
 	$colors = array( 'blue', 'green', 'orange', 'purple', 'yellow' );
 	$scheme = get_theme_mod( 'pine_scheme', 'red' );
 	if ( in_array( $scheme, $colors ) ) {
-		wp_enqueue_style( 'pine-style-color-' . $scheme );
+		wp_enqueue_style( 'pine-style-color-' . $scheme, get_template_directory_uri() . '/css/color-' . $scheme . '.css', array( 'pine-style' ), '20160411' );
 	}
 
 	// Scripts.
@@ -195,3 +191,8 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+/**
+ * Pine Admin Page
+ */
+require get_template_directory() . '/inc/admin-page.php';

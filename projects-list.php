@@ -17,8 +17,14 @@ if ( get_query_var( 'paged' ) ) {
 ?>
 
 	<?php /* Start the Loop */ ?>
-	<?php while ( have_posts() ) : the_post(); ?>
+	<?php while ( have_posts() ) :
+		the_post();
 
+		$page_title = get_the_title();
+		$page_content = get_the_content();
+	?>
+
+	<?php if ( has_post_thumbnail() || ! empty( $page_title ) || ! empty( $page_content ) ) : ?>
 	<div class="<?php if ( has_post_thumbnail() ) : ?>hero-subheader <?php endif; ?>animated fadeIn"<?php pine_thumbnail_src(); ?>>
 		<div class="container">
 			<div class="row">
@@ -35,6 +41,7 @@ if ( get_query_var( 'paged' ) ) {
 		<div class="hero-subheader__overlay"></div><!-- /.overlay -->
 		<?php endif; ?>
 	</div><!-- /.hero subheader -->
+	<?php endif; ?>
 
 	<?php endwhile; ?>
 
@@ -46,12 +53,12 @@ if ( get_query_var( 'paged' ) ) {
 						<ul class="projects-cat-toggle clearfix">
 							<li data-filter="*" class="tabs-nav__item--active"><?php esc_html_e( 'All', 'pine' ); ?></li>
 							<?php
-							$pine_types = get_terms( apply_filters( 'pine_portfolio_terms', array( 'jetpack-portfolio-type' ) ) );
+							$pine_terms = get_terms( pine_get_portfolio_taxonomy() );
 
-							if ( ! empty( $pine_types ) && ! is_wp_error( $pine_types ) ) :
+							if ( ! empty( $pine_terms ) && ! is_wp_error( $pine_terms ) ) :
 
-								foreach ( $pine_types as $type ) : ?>
-							<li data-filter="<?php echo esc_attr( '.cat-' . $type->slug ); ?>"><?php echo esc_html( $type->name ); ?></li>
+								foreach ( $pine_terms as $term ) : ?>
+							<li data-filter="<?php echo esc_attr( '.cat-' . $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></li>
 							<?php endforeach;
 
 							endif; ?>
@@ -72,10 +79,10 @@ if ( get_query_var( 'paged' ) ) {
 				<?php
 					$pine_args = array(
 						// Type Parameters.
-						'post_type' 			=> apply_filters( 'pine_portfolio_post_type', array( 'jetpack-portfolio' ) ),
+						'post_type' 			=> pine_get_portfolio_post_type(),
 
 						// Pagination Parameters.
-						'posts_per_page' 	=> apply_filters( 'pine_portfolio_posts_per_page', get_option( 'jetpack_portfolio_posts_per_page', get_option( 'posts_per_page', 9 ) ) ),
+						'posts_per_page' 	=> pine_get_portfolio_posts_per_page(),
 						'paged' 					=> $paged,
 
 						// Permission Parameters.
