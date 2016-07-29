@@ -59,7 +59,7 @@ body#tinymce.wp-editor h5 {
 body#tinymce.wp-editor h6 {
   font-size: 14px;
 }
-body#tinymce.wp-editor img {
+body#tinymce.wp-editor img:not(.wp-more-tag) {
   max-width: 100%;
   height: auto;
 }
