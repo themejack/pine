@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.7] - 2016-07-29
+### Fixed
+- Fix WP editor read more tag image height (thanks @josephbydeign)
+
 ## [1.0.6] - 2016-04-27
 ### Added
 - Theme admin page
