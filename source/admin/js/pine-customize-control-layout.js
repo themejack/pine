@@ -1,6 +1,7 @@
 ( function( wp, $ ) {
+	'use strict';
 
-	wp.customize.LayoutControl = wp.customize.Control.extend({
+	wp.customize.LayoutControl = wp.customize.Control.extend( {
 		ready: function() {
 			var control = this,
 				radios = $( '.radios', this.container ),
@@ -13,7 +14,9 @@
 				event.preventDefault();
 
 				var layout = $( this ).closest( '.layout' );
-				if ( layout.hasClass( 'selected' ) ) return;
+				if ( layout.hasClass( 'selected' ) ) {
+					return;
+				}
 
 				var container = layout.closest( '.customize-control-layout' );
 				$( '.selection .layout', container ).removeClass( 'selected' );
@@ -23,7 +26,7 @@
 				control.setting.set( layout.data( 'value' ) );
 			} );
 		}
-	});
+	} );
 
 	$.extend( wp.customize.controlConstructor, {
 		'layout': wp.customize.LayoutControl,

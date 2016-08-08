@@ -1,6 +1,7 @@
 ( function( wp, $ ) {
+	'use strict';
 
-	wp.customize.ColorSchemeControl = wp.customize.Control.extend({
+	wp.customize.ColorSchemeControl = wp.customize.Control.extend( {
 		ready: function() {
 			var control = this,
 				radios = $( '.radios', this.container ),
@@ -8,30 +9,35 @@
 				$schemes = $( '.scheme', selection ),
 				schemes = control.params.schemes,
 				colors = control.setting.get() !== 'custom' ? schemes[ control.setting.get() ].colors : {},
-				colors_handler,
+				colorsHandler,
 				apply = $( '.apply-scheme', this.container );
 
-			var schemes_colors = [];
+			var schemesColors = [];
 
-			colors_handler = function( to ) {
-				if ( schemes_colors.length == 0 ) {
-					for ( scheme in schemes ) {
-						schemes_colors.push( schemes[scheme].color );
+			var addColorsChangeHandler = function( key ) {
+				if ( wp.customize.has( key ) ) {
+					wp.customize( key, function( setting ) {
+						if ( true !== setting.colorSchemeBinded ) {
+							setting.bind( colorsChangeHandler );
+							setting.colorSchemeBinded = true;
+						}
+					} );
+				}
+			};
 
-						$.each( schemes[scheme].colors, function( key, value ) {
-							if ( wp.customize.has( key ) ) {
-								wp.customize( key, function( setting ) {
-									if ( setting.color_scheme_binded !== true ) {
-										setting.bind( colors_change_handler );
-										setting.color_scheme_binded = true;
-									}
-								} );
-							}
-						} );
+			colorsHandler = function( to ) {
+				if ( 0 === schemesColors.length ) {
+					for ( var scheme in schemes ) {
+						schemesColors.push( schemes[scheme].color );
+
+						$.each( schemes[scheme].colors, addColorsChangeHandler );
 					}
 				}
 
-				if ( to == 'custom' ) return;
+				if ( 'custom' === to ) {
+					return;
+				}
+
 				colors = schemes[ to ].colors;
 				$.each( colors, function( key, value ) {
 					if ( wp.customize.has( key ) ) {
@@ -48,42 +54,44 @@
 				} );
 			};
 
-			var change_handler = function() {
+			var changeHandler = function() {
 				var scheme = $( '[data-value="' + control.setting.get() + '"]', selection );
 				$( '.scheme.selected', selection ).removeClass( 'selected' );
 
 				scheme.addClass( 'selected' );
 			};
 
-			var change_timeout = null;
+			var changeTimeout = null;
 
-			var colors_change_handler = function() {
-				if ( change_timeout !== null )
-					clearTimeout( change_timeout );
+			var colorsChangeHandler = function() {
+				if ( changeTimeout !== null ) {
+					clearTimeout( changeTimeout );
+				}
 
-				if ( control.setting.get() == 'custom' ) return false;
+				if ( 'custom' === control.setting.get() ) {
+					return false;
+				}
 
 				var equal = true;
-				var is_first = true;
-				var last_color = '';
-				var current_color = '';
+				var isFirst = true;
+				var lastColor = '';
+				var currentColor = '';
+				var allSettings = wp.customize.get();
 
-				for ( color in colors ) {
+				for ( var color in colors ) {
 					if ( wp.customize.has( color ) ) {
-						wp.customize( color, function( setting ) {
-							current_color = setting.get();
-						} );
+						currentColor = allSettings[ color ];
 
-						if ( ! is_first ) {
-							if ( last_color !== current_color ) {
+						if ( ! isFirst ) {
+							if ( lastColor !== currentColor ) {
 								equal = false;
 								break;
 							}
 						}
 						else {
-							is_first = false;
-							last_color = current_color;
-							if ( schemes_colors.indexOf( last_color ) < 0 ) {
+							isFirst = false;
+							lastColor = currentColor;
+							if ( schemesColors.indexOf( lastColor ) < 0 ) {
 								equal = false;
 								break;
 							}
@@ -91,10 +99,10 @@
 					}
 				}
 
-				if ( equal == false ) {
-					change_timeout = setTimeout( function() {
+				if ( false === equal ) {
+					changeTimeout = setTimeout( function() {
 						control.setting.set( 'custom' );
-						change_timeout = null;
+						changeTimeout = null;
 					}, 200 );
 				}
 
@@ -104,21 +112,23 @@
 			radios.hide();
 			$( '.scheme[data-value="' + control.setting.get() + '"]', selection ).addClass( 'selected' );
 
-			control.setting.bind( change_handler );
-			colors_handler( control.setting.get() );
-			change_handler();
+			control.setting.bind( changeHandler );
+			colorsHandler( control.setting.get() );
+			changeHandler();
 
 			apply.on( 'click', function( event ) {
 				event.preventDefault();
 
-				colors_handler( control.setting.get() );
+				colorsHandler( control.setting.get() );
 			} );
 
 			$( '.color', $schemes ).on( 'click', function( event ) {
 				event.preventDefault();
 
 				var scheme = $( this ).closest( '.scheme' );
-				if ( scheme.hasClass( 'selected' ) ) return;
+				if ( scheme.hasClass( 'selected' ) ) {
+					return;
+				}
 
 				control.setting.set( scheme.data( 'value' ) );
 			} );

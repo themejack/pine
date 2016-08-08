@@ -1,45 +1,49 @@
+/* global BackgroundCheck:true */
 ( function( $ ) {
+	'use strict';
+
 	var $body = $( 'body' );
 	var $header = $( '.header', $body );
-	var $header_spacer = $( '.header-spacer', $body );
+	var $headerSpacer = $( '.header-spacer', $body );
 	var $offcanvas = $( '.offcanvas', $body );
 	var $adminbar = $( '#wpadminbar', $body );
 
-	$( document ).on ( 'ready', function() {
+	$( document ).on( 'ready', function() {
 		$adminbar = $( '#wpadminbar', $body );
 	} );
 
-	var adapt_header_spacer;
-	var adapt_header_spacer_timeout = null;
+	var adaptHeaderSpacerTimeout = null;
 	var nothing = null;
-	var $header_height = $header.outerHeight();
-	( adapt_header_spacer = function() {
-		if ( adapt_header_spacer_timeout !== null )
-			clearTimeout( adapt_header_spacer_timeout );
+	var $headerHeight = $header.outerHeight();
+	var adaptHeaderSpacer = function() {
+		if ( adaptHeaderSpacerTimeout !== null ) {
+			clearTimeout( adaptHeaderSpacerTimeout );
+		}
 
 		setTimeout( function() {
 			nothing = $header[0].offsetHeight;
-			$header_height = $header.outerHeight();
-			$header_spacer.css( 'height', $header_height + 'px' );
+			$headerHeight = $header.outerHeight();
+			$headerSpacer.css( 'height', $headerHeight + 'px' );
 			if ( $body.hasClass( 'admin-bar' ) && $adminbar.length ) {
-				$offcanvas.css( 'top', ( $header_height + $adminbar.outerHeight() ) + 'px' );
+				$offcanvas.css( 'top', ( $headerHeight + $adminbar.outerHeight() ) + 'px' );
 			}
 			else {
-				$offcanvas.css( 'top', $header_height + 'px' );
+				$offcanvas.css( 'top', $headerHeight + 'px' );
 			}
 		}, 400 );
-	} () );
+	};
+	adaptHeaderSpacer();
 
-	$( 'img', $header ).on( 'load', adapt_header_spacer );
-	$( document ).on( 'ready', adapt_header_spacer );
-	$( window ).on( 'resize orientationchange', adapt_header_spacer );
+	$( 'img', $header ).on( 'load', adaptHeaderSpacer );
+	$( document ).on( 'ready', adaptHeaderSpacer );
+	$( window ).on( 'resize orientationchange', adaptHeaderSpacer );
 
 	// Full-screen navigation
-	$offcanvas_toggle = $( '.offcanvas-toggle' );
+	var $offcanvasToggle = $( '.offcanvas-toggle' );
 	$offcanvas = $( '.offcanvas' );
-	$offcanvas_toggle.on( 'click', function() {
+	$offcanvasToggle.on( 'click', function() {
 		$offcanvas.toggleClass( 'offcanvas--active' );
-		$offcanvas_toggle.toggleClass( 'offcanvas-toggle--active' );
+		$offcanvasToggle.toggleClass( 'offcanvas-toggle--active' );
 	} );
 
 	// Project list category masonry and isotope
@@ -47,40 +51,40 @@
 		itemSelector: '.project-block'
 	} );
 
-	var gridMasonry = $( '.projects-block__list' ).masonry( {
+	$( '.projects-block__list' ).masonry( {
 		itemSelector: '.project-block'
 	} );
 
-	$projects_cat_toggle = $( '.projects-cat-toggle' );
-	$projects_cat_toggle.on( 'click', 'li', function() {
+	var $projectsCatToggle = $( '.projects-cat-toggle' );
+	$projectsCatToggle.on( 'click', 'li', function() {
 		var filterValue = $( this ).attr( 'data-filter' );
 		grid.isotope( { filter: filterValue } );
 
-		$( '.tabs-nav__item--active', $projects_cat_toggle ).removeClass( 'tabs-nav__item--active' );
+		$( '.tabs-nav__item--active', $projectsCatToggle ).removeClass( 'tabs-nav__item--active' );
 		$( this ).addClass( 'tabs-nav__item--active' );
 	} );
 
 	// Project list type toggle
-	$projects_block_list = $( '.projects-block__list' );
+	var $projectsBlockList = $( '.projects-block__list' );
 	$( '.project-type-nav__list' ).on( 'click', function() {
-		$projects_block_list.addClass('projects-block__list--list');
+		$projectsBlockList.addClass('projects-block__list--list');
 		grid.isotope( 'layout' );
 	} );
 
 	$( '.project-type-nav__grid' ).on( 'click', function() {
-		$projects_block_list.removeClass( 'projects-block__list--list' );
+		$projectsBlockList.removeClass( 'projects-block__list--list' );
 		grid.isotope( 'layout' );
 	} );
 
-	$projects_type_nav = $( '.projects-type-nav' );
-	$projects_type_nav.on( 'click', 'li', function() {
-		$( '.projects-type-nav__item--active', $projects_type_nav ).removeClass( 'projects-type-nav__item--active' );
+	var $projectsTypeNav = $( '.projects-type-nav' );
+	$projectsTypeNav.on( 'click', 'li', function() {
+		$( '.projects-type-nav__item--active', $projectsTypeNav ).removeClass( 'projects-type-nav__item--active' );
 		$( this ).addClass( 'projects-type-nav__item--active' );
 	} );
 
 	// Front page hero background check
-	var $hero_subheader = $( '.hero-subheader' );
-	if ( $hero_subheader.length ) {
+	var $heroSubheader = $( '.hero-subheader' );
+	if ( $heroSubheader.length ) {
 		BackgroundCheck.init( {
 			targets: '.hero-subheader > .container',
 			images: '.hero-subheader',
@@ -90,8 +94,8 @@
 	}
 
 	// Post hero background check
-	var $post_hero = $( '.post-hero--has-background' );
-	if ( $post_hero.length ) {
+	var $postHero = $( '.post-hero--has-background' );
+	if ( $postHero.length ) {
 		BackgroundCheck.init( {
 			targets: '.post-hero--has-background > .container',
 			images: '.post-hero--has-background',

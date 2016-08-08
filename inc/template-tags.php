@@ -110,30 +110,67 @@ if ( ! function_exists( 'pine_thumbnail_src' ) ) :
 	}
 endif;
 
+/**
+ * Display custom logo
+ */
+function pine_custom_logo() {
+	$custom_logo_id = get_theme_mod( 'custom_logo', get_template_directory_uri() . '/img/content/portfolio.jpg' );
+
+	if ( $custom_logo_id ) : ?>
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="custom-logo-link" rel="home" itemprop="url">
+		<?php if ( is_numeric( $custom_logo_id ) ) :
+			echo wp_get_attachment_image( $custom_logo_id, 'full', false, array(
+				'class'    => 'custom-logo',
+				'itemprop' => 'logo',
+			) );
+		else : ?>
+		<img src="<?php echo esc_url( $custom_logo_id ); ?>" class="custom-logo" itemprop="logo" />
+		<?php endif; ?>
+	</a>
+	<?php elseif ( is_customize_preview() ) : ?>
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="custom-logo-link" style="display:none;"><img class="custom-logo"/></a>
+	<?php endif;
+}
+
 if ( ! function_exists( 'pine_logo' ) ) :
 	/**
 	 * Display pine logo
 	 */
 	function pine_logo() {
-		$pine_header = get_theme_mod( 'pine_header', 'title' );
+		if ( function_exists( 'the_custom_logo' ) ) :
+			pine_logo_upgrade();
 
-		$pine_header_logo_default = get_template_directory_uri() . '/img/content/portfolio.jpg';
-		$pine_header_logo = get_theme_mod( 'pine_header_logo' );
-		if ( empty( $pine_header_logo ) ) {
-			$pine_header_logo = $pine_header_logo_default;
-		}
+			$header_text = get_theme_mod( 'header_text', 1 );
 
-		if ( 'title' === $pine_header || is_customize_preview() ) : ?>
-			<h1 class="logo site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1><!-- /.logo -->
-		<?php endif; ?>
-		<?php if ( 'logo' === $pine_header || is_customize_preview() ) : ?>
-			<h1 class="logo site-logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-				<img class="site-logo__image" src="<?php echo esc_url( $pine_header_logo ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" />
-				<?php if ( is_customize_preview() ) : ?>
-				<img class="site-logo__image default" src="<?php echo esc_url( $pine_header_logo_default ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" style="display: none" />
-				<?php endif; ?>
-			</a></h1><!-- /.logo -->
-		<?php
+			if ( 0 === $header_text ) : ?>
+				<h1 class="logo site-logo"><?php pine_custom_logo(); ?></h1>
+			<?php endif;
+
+			if ( 1 === $header_text ) : ?>
+				<h1 class="logo site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1><!-- /.logo -->
+			<?php endif;
+		else :
+			$pine_header = get_theme_mod( 'pine_header', 'title' );
+
+			$pine_header_logo_default = get_template_directory_uri() . '/img/content/portfolio.jpg';
+			$pine_header_logo = get_theme_mod( 'pine_header_logo' );
+			if ( empty( $pine_header_logo ) ) {
+				$pine_header_logo = $pine_header_logo_default;
+			}
+
+			if ( 'title' === $pine_header || is_customize_preview() ) : ?>
+				<h1 class="logo site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1><!-- /.logo -->
+			<?php endif;
+
+			if ( 'logo' === $pine_header || is_customize_preview() ) : ?>
+				<h1 class="logo site-logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+					<img class="site-logo__image" src="<?php echo esc_url( $pine_header_logo ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" />
+					<?php if ( is_customize_preview() ) : ?>
+					<img class="site-logo__image default" src="<?php echo esc_url( $pine_header_logo_default ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" style="display: none" />
+					<?php endif; ?>
+				</a></h1><!-- /.logo -->
+			<?php
+			endif;
 		endif;
 	}
 endif;

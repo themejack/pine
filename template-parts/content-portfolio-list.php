@@ -8,10 +8,10 @@
  */
 
 $post_classes = array( 'col-sm-6', 'col-md-4', 'project-block' );
-$portfolio_terms = apply_filters( 'pine_portfolio_terms', array( 'jetpack-portfolio-type' ) );
+$portfolio_taxonomies = pine_get_portfolio_taxonomy();
 
-foreach ( $portfolio_terms as $term ) {
-	$portfolio_types = get_the_terms( get_the_id(), $term );
+foreach ( $portfolio_taxonomies as $tax ) {
+	$portfolio_types = get_the_terms( get_the_id(), $tax );
 
 	if ( ! empty( $portfolio_types ) && ! is_wp_error( $portfolio_types ) ) {
 		foreach ( $portfolio_types as $type ) {

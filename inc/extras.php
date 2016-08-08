@@ -272,3 +272,82 @@ function pine_category_transient_flusher() {
 }
 add_action( 'edit_category', 'pine_category_transient_flusher' );
 add_action( 'save_post', 'pine_category_transient_flusher' );
+
+/**
+ * Portfolio post type
+ *
+ * @return array
+ */
+function pine_get_portfolio_post_type() {
+	$pine_portfolio_post_type = array( 'jetpack-portfolio' );
+
+	/**
+	 * Filter portfolio post type
+	 *
+	 * @param array $pine_portfolio_post_type Default post types.
+	 */
+	return (array) apply_filters( 'pine_portfolio_post_type', $pine_portfolio_post_type );
+}
+
+/**
+ * Portfolio posts per page
+ *
+ * @return integer
+ */
+function pine_get_portfolio_posts_per_page() {
+	$pine_portfolio_posts_per_page = (int) get_option( 'jetpack_portfolio_posts_per_page', get_option( 'posts_per_page', 9 ) );
+
+	/**
+	 * Filter portfolio number of posts per page
+	 *
+	 * @param integer $pine_portfolio_posts_per_page Default number of posts per page.
+	 */
+	return (int) apply_filters( 'pine_portfolio_posts_per_page', $pine_portfolio_posts_per_page );
+}
+
+/**
+ * Portfolio taxonomy
+ *
+ * @return array
+ */
+function pine_get_portfolio_taxonomy() {
+	$pine_portfolio_taxonomy = array( 'jetpack-portfolio-type' );
+
+	/**
+	 * Filter portfolio taxonomy
+	 *
+	 * @param array $pine_portfolio_taxonomy Default taxonomies.
+	 */
+	return (array) apply_filters( 'pine_portfolio_taxonomy', $pine_portfolio_taxonomy );
+}
+
+/**
+ * Upgrade theme logo
+ */
+function pine_logo_upgrade() {
+	$upgraded = absint( get_theme_mod( 'pine_logo_upgraded', 0 ) );
+
+	// Check is site logo already upgraded.
+	if ( 1 === $upgraded ) {
+		return;
+	}
+
+	$pine_header = get_theme_mod( 'pine_header' );
+	$pine_header_logo = get_theme_mod( 'pine_header_logo' );
+
+	/* Update header_text value. */
+	if ( 'title' === $pine_header ) {
+		set_theme_mod( 'header_text', 1 );
+	}
+	if ( 'logo' === $pine_header ) {
+		set_theme_mod( 'header_text', 0 );
+	}
+
+	/* Update custom_logo value. */
+	if ( ! empty( $pine_header_logo ) ) {
+		set_theme_mod( 'custom_logo', $pine_header_logo );
+	}
+
+	set_theme_mod( 'pine_logo_upgraded', 1 );
+}
+add_action( 'admin_init', 'pine_logo_upgrade' );

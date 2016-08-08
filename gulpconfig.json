@@ -73,6 +73,9 @@
                 ],
                 "source/admin/less/pine-editor.less": [
                     "admin/css/pine-editor.css"
+                ],
+                "source/admin/less/admin-page.less": [
+                    "admin/css/pine-admin-page.css"
                 ]
             }
         }
