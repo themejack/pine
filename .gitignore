@@ -6,6 +6,7 @@
 gulpfile.js
 gulpconfig.json
 package.json
+jsconfig.json
 
 # node modules
 /node_modules

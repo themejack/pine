@@ -21,34 +21,39 @@ function pine_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
 
-	$sanitize_header_choice = new Pine_Sanitize_Select( array( 'logo', 'title' ), 'title' );
+	if ( ! function_exists( 'the_custom_logo' ) ) {
+		$sanitize_header_choice = new Pine_Sanitize_Select( array( 'logo', 'title' ), 'title' );
 
-	$wp_customize->add_setting( 'pine_header', array(
-		'default' => 'title',
-		'transport' => 'postMessage',
-		'sanitize_callback' => array( $sanitize_header_choice, 'callback' ),
-	) );
+		$wp_customize->add_setting( 'pine_header', array(
+			'default' => 'title',
+			'transport' => 'postMessage',
+			'sanitize_callback' => array( $sanitize_header_choice, 'callback' ),
+		) );
 
-	$wp_customize->add_control( 'pine_header', array(
-		'label' => __( 'Display', 'pine' ),
-		'section' => 'title_tagline',
-		'type' => 'select',
-		'choices' => array(
-			'logo' => __( 'Logo', 'pine' ),
-			'title' => __( 'Site Title', 'pine' ),
-		),
-	) );
+		$wp_customize->add_control( 'pine_header', array(
+			'label' => __( 'Display', 'pine' ),
+			'section' => 'title_tagline',
+			'type' => 'select',
+			'choices' => array(
+				'logo' => __( 'Logo', 'pine' ),
+				'title' => __( 'Site Title', 'pine' ),
+			),
+		) );
 
-	$wp_customize->add_setting( 'pine_header_logo', array(
-		'default' => get_template_directory_uri() . '/img/content/portfolio.jpg',
-		'transport' => 'postMessage',
-		'sanitize_callback' => 'esc_url_raw',
-	) );
+		$wp_customize->add_setting( 'pine_header_logo', array(
+			'default' => get_template_directory_uri() . '/img/content/portfolio.jpg',
+			'transport' => 'postMessage',
+			'sanitize_callback' => 'esc_url_raw',
+		) );
 
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'pine_header_logo', array(
-		'label' => __( 'Upload a logo', 'pine' ),
-		'section' => 'title_tagline',
-	) ) );
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'pine_header_logo', array(
+			'label' => __( 'Upload a logo', 'pine' ),
+			'section' => 'title_tagline',
+		) ) );
+	} else {
+		$wp_customize->get_setting( 'custom_logo' )->default = get_template_directory_uri() . '/img/content/portfolio.jpg';
+		$wp_customize->selective_refresh->get_partial( 'custom_logo' )->render_callback = 'pine_custom_logo';
+	}
 
 	$sections = $wp_customize->sections();
 

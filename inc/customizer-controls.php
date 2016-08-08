@@ -50,8 +50,8 @@ class Pine_Layout_Control extends WP_Customize_Control {
 	 * @since 1.0
 	 */
 	public function enqueue() {
-		wp_enqueue_style( 'pine-customize-control-layout' );
-		wp_enqueue_script( 'pine-customize-control-layout' );
+		wp_enqueue_style( 'pine-customize-control-layout', get_template_directory_uri() . '/admin/css/pine-customize-control-layout.css', array( 'customize-controls' ), '20150610', 'all' );
+		wp_enqueue_script( 'pine-customize-control-layout', get_template_directory_uri() . '/admin/js/pine-customize-control-layout.js', array( 'customize-controls', 'jquery' ), '20140806', true );
 	}
 
 	/**
@@ -152,8 +152,8 @@ class Pine_Color_Scheme_Control extends WP_Customize_Control {
 	 * @since 1.0
 	 */
 	public function enqueue() {
-		wp_enqueue_style( 'pine-customize-control-color-scheme' );
-		wp_enqueue_script( 'pine-customize-control-color-scheme' );
+		wp_enqueue_style( 'pine-customize-control-color-scheme', get_template_directory_uri() . '/admin/css/pine-customize-control-color-scheme.css', array( 'customize-controls' ), '20150610', 'all' );
+		wp_enqueue_script( 'pine-customize-control-color-scheme', get_template_directory_uri() . '/admin/js/pine-customize-control-color-scheme.js', array( 'customize-controls', 'jquery' ), '20150610', true );
 	}
 
 	/**
@@ -254,8 +254,8 @@ class Pine_Social_Buttons_Control extends WP_Customize_Control {
 	 * @since 1.0
 	 */
 	public function enqueue() {
-		wp_enqueue_style( 'pine-customize-control-social-buttons' );
-		wp_enqueue_script( 'pine-customize-control-social-buttons' );
+		wp_enqueue_style( 'pine-customize-control-social-buttons', get_template_directory_uri() . '/admin/css/pine-customize-control-social-buttons.css', array( 'customize-controls' ), '20150610', 'all' );
+		wp_enqueue_script( 'pine-customize-control-social-buttons', get_template_directory_uri() . '/admin/js/pine-customize-control-social-buttons.js', array( 'customize-controls', 'jquery' ), '20150610', true );
 	}
 
 	/**

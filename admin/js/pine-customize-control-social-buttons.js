@@ -1,147 +1,163 @@
 ( function( wp, $ ) {
+	'use strict';
 
 	wp.customize.SocialButtonsControl = wp.customize.Control.extend({
 		ready: function() {
 			var control = this,
-				social_buttons_container = $( '.social-buttons', this.container ),
-				add_button = $( '.add-social-button', this.container ),
-				social_buttons = this.setting.get(),
-				social_networks = this.params.socials,
+				socialButtonsContainer = $( '.social-buttons', this.container ),
+				addButton = $( '.add-social-button', this.container ),
+				socialButtons = this.setting.get(),
+				socialNetworks = this.params.socials,
 				template = wp.template( 'social-button' );
 
-			$.each( social_buttons, function( i, social_button ) {
-				var social, social_value = social_button.social, url = social_button.url, css_class = social_button.css_class;
+			$.each( socialButtons, function( i, socialButton ) {
+				var social,
+					socialValue = socialButton.social,
+					url = socialButton.url,
+					cssClass = socialButton.cssClass;
+
 				social = 'custom';
-				if ( social_networks[social_value] ) {
-					social = social_value;
+				if ( socialNetworks[ socialValue ] ) {
+					social = socialValue;
 				}
 
-				social_buttons_container.append( template( {
+				socialButtonsContainer.append( template( {
 					social: social,
-					social_value: social_value,
+					socialValue: socialValue,
 					url: url,
-					css_class: css_class,
+					cssClass: cssClass,
 					editing: false
 				} ) );
 			} );
 
-			add_button.on( 'click', function( event ) {
+			addButton.on( 'click', function( event ) {
 				event.preventDefault();
-				var social_buttons_container = $( '.social-buttons', $( this ).closest( '.customize-control-content' ) );
-				var social_button = $( template( { social: '', social_value: '', url: '', css_class: '', editing: true } ) );
+				var socialButtonsContainer = $( '.social-buttons', $( this ).closest( '.customize-control-content' ) );
+				var socialButton = $( template( { social: '', socialValue: '', url: '', cssClass: '', editing: true } ) );
 
-				social_button.appendTo( social_buttons_container ).find( '.fields select.social' ).trigger( 'change' );
+				socialButton.appendTo( socialButtonsContainer ).find( '.fields select.social' ).trigger( 'change' );
 
-				$( '.wp-full-overlay-sidebar-content' ).animate( { scrollTop: $( '.social-button:last-of-type', social_buttons_container ).offset().top }, 500 );
+				$( '.wp-full-overlay-sidebar-content' ).animate( { scrollTop: $( '.social-button:last-of-type', socialButtonsContainer ).offset().top }, 500 );
 			} );
 
-			social_buttons_container.on( 'change', '.social-button select.social', function() {
+			socialButtonsContainer.on( 'change', '.social-button select.social', function() {
 				var $self = $( this ),
-						custom_social = $( '.custom-social', $self.closest( '.social-button' ) );
+						customSocial = $( '.custom-social', $self.closest( '.social-button' ) );
 
-				custom_social.hide();
+				customSocial.hide();
 
 				if ( 'custom' === $self.val() ) {
-					custom_social.show();
+					customSocial.show();
 				}
 			} );
 
-			function social_buttons_update_setting( container ) {
-				var new_setting = [];
+			function socialButtonsUpdateSetting( container ) {
+				var newSetting = [];
 				$( '.social-button', container ).each( function() {
-					var url, social;
+					var url, social, cssClass;
+
 					social = $( 'select.social', this ).val();
 					if ( 'custom' === social ) {
 						social = $( '.custom-social input', this ).val();
 					}
-					css_class = $( 'input.css-class', this ).val();
+
+					cssClass = $( 'input.css-class', this ).val();
+
 					url = $( 'input.url', this ).val();
-					new_setting.push( { social: social, css_class: css_class, url: url } );
+
+					newSetting.push( { social: social, cssClass: cssClass, url: url } );
 				} );
 
-				control.setting.set( new_setting );
+				control.setting.set( newSetting );
 			}
 
-			social_buttons_container.on( 'change', 'select, input', function() {
-				var social_button = $( this ).closest( '.social-button' ),
-						social_buttons_container = social_button.closest( '.social-buttons' ),
+			socialButtonsContainer.on( 'change', 'select, input', function() {
+				var socialButton = $( this ).closest( '.social-button' ),
+						socialButtonsContainer = socialButton.closest( '.social-buttons' ),
 						social,
-						social_value = $( '.fields select.social', social_button ).val(),
-						url = $( '.fields input.url', social_button ).val(),
-						css_class;
+						socialValue = $( '.fields select.social', socialButton ).val(),
+						url = $( '.fields input.url', socialButton ).val(),
+						cssClass;
 
 				social = 'custom';
-				if ( social_networks[social_value] ) {
-					social = social_value;
+				if ( socialNetworks[socialValue] ) {
+					social = socialValue;
 				}
 
 				if ( 'custom' === social ) {
-					css_class = $( '.custom-social input', social_button ).val();
+					cssClass = $( '.custom-social input', socialButton ).val();
 				} else {
-					css_class = social;
+					cssClass = social;
 				}
 
-				css_class.replace(/[^a-z0-9]/g, function(s) {
+				cssClass.replace(/[^a-z0-9]/g, function(s) {
 					var c = s.charCodeAt(0);
-					if (c == 32) return '-';
-					if (c >= 65 && c <= 90) return s.toLowerCase();
-					return '__' + ('000' + c.toString(16)).slice(-4);
+
+					if ( c === 32 ) {
+						return '-';
+					}
+
+					if ( c >= 65 && c <= 90 ) {
+						return s.toLowerCase();
+					}
+
+					return '__' + ( '000' + c.toString(16) ).slice(-4);
 				});
 
-				social_button.replaceWith( template( {
+				socialButton.replaceWith( template( {
 					social: social,
-					social_value: social_value,
+					socialValue: socialValue,
 					url: url,
-					css_class: css_class,
+					cssClass: cssClass,
 					editing: true
 				} ) );
 
-				social_buttons_update_setting( social_buttons_container );
+				socialButtonsUpdateSetting( socialButtonsContainer );
 			} );
 
-			social_buttons_container.on( 'click', '.social-button .preview .social-button-preview', function( event ) {
+			socialButtonsContainer.on( 'click', '.social-button .preview .social-button-preview', function( event ) {
 				event.preventDefault();
 
-				var social_button = $( this ).closest( '.social-button' ),
-						fields = $( '.fields', social_button );
+				var socialButton = $( this ).closest( '.social-button' ),
+						fields = $( '.fields', socialButton );
 
 				fields.toggle();
 			} );
 
-			social_buttons_container.on( 'click', '.social-button .preview .remove-button', function( event ) {
+			socialButtonsContainer.on( 'click', '.social-button .preview .remove-button', function( event ) {
 				event.preventDefault();
 
-				var social_button = $( this ).closest( '.social-button' ),
-						social_buttons_container = social_button.closest( '.social-buttons' );
+				var socialButton = $( this ).closest( '.social-button' ),
+						socialButtonsContainer = socialButton.closest( '.social-buttons' );
 
-				social_button.remove();
+				socialButton.remove();
 
-				social_buttons_update_setting( social_buttons_container );
+				socialButtonsUpdateSetting( socialButtonsContainer );
 			} );
 
-			social_buttons_container.on( 'click', '.social-button .preview .reorder-button', function( event ) {
+			socialButtonsContainer.on( 'click', '.social-button .preview .reorder-button', function( event ) {
 				event.preventDefault();
 
-				var social_button = $( this ).closest( '.social-button' ),
-					is_up = $( this ).hasClass( 'move-up' ) ? true : false,
-					social_buttons_container = social_button.closest( '.social-buttons' );
+				var socialButton = $( this ).closest( '.social-button' ),
+					isUp = $( this ).hasClass( 'move-up' ) ? true : false,
+					socialButtonsContainer = socialButton.closest( '.social-buttons' );
 
-				if ( ( is_up && social_button.is( ':first-of-type' ) ) || ( !is_up && social_button.is( ':last-of-type' ) ) ) {
+				if ( ( isUp && socialButton.is( ':first-of-type' ) ) || ( !isUp && socialButton.is( ':last-of-type' ) ) ) {
 					return;
 				}
 
-				if ( is_up ) {
-					var before_element = social_button.prev( '.social-button' );
-					before_element.before( social_button.clone() );
+				if ( isUp ) {
+					var beforeElement = socialButton.prev( '.social-button' );
+					beforeElement.before( socialButton.clone() );
 				}
 				else {
-					var after_element = social_button.next( '.social-button' );
-					after_element.after( social_button.clone() );
+					var afterElement = socialButton.next( '.social-button' );
+					afterElement.after( socialButton.clone() );
 				}
 
-				social_button.remove();
+				socialButton.remove();
 
-				social_buttons_update_setting( social_buttons_container );
+				socialButtonsUpdateSetting( socialButtonsContainer );
 			} );
 		}
 	});
