@@ -1,0 +1,29 @@
+{
+	"boss": true,
+	"camelcase": true,
+	"curly": true,
+	"eqeqeq": true,
+	"eqnull": true,
+	"esversion": 5,
+	"expr": true,
+	"immed": true,
+	"indent": 1,
+	"noarg": true,
+	"nonbsp": true,
+	"onevar": true,
+	"quotmark": "single",
+	"trailing": true,
+	"undef": true,
+	"unused": true,
+	"strict": true,
+
+	"browser": true,
+
+	"globals": {
+		"_": false,
+		"Backbone": false,
+		"jQuery": false,
+		"JSON": false,
+		"wp": false
+	}
+}
