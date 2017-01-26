@@ -1,0 +1,477 @@
+# Copyright (C) 2017 Themejack
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pine 1.0.8\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/pine\n"
+"Last-Translator: Themejack <support@themejack.com>\n"
+"Language-Team: Themejack <support@themejack.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 404.php:15
+msgid "Don't fall down!"
+msgstr ""
+
+#: 404.php:15
+msgid "Come back to %s."
+msgstr ""
+
+#: 404.php:15
+msgid "Homepage"
+msgstr ""
+
+#: 404.php:17
+msgid "It's looking like you may have taken a wrong turn."
+msgstr ""
+
+#: 404.php:17
+msgid "Don't worry, it happens to the best of us."
+msgstr ""
+
+#: comments.php:31
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:40, comments.php:61
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:43, comments.php:64
+msgid "Older Comments"
+msgstr ""
+
+#: comments.php:44, comments.php:65
+msgid "Newer Comments"
+msgstr ""
+
+#: comments.php:78
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:26
+msgid "%1$s &copy; %2$s. - Created by %3$s."
+msgstr ""
+
+#: functions.php:68
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:125
+msgid "Sidebar"
+msgstr ""
+
+#: header.php:24
+msgid "Skip to content"
+msgstr ""
+
+#: projects-list.php:54
+msgid "All"
+msgstr ""
+
+#: search.php:18
+msgid "Search Results for: %s"
+msgstr ""
+
+#: searchform.php:11, searchform.php:12
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:12
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr ""
+
+#: searchform.php:14
+msgctxt "submit button"
+msgid "Search"
+msgstr ""
+
+#: single.php:53
+msgid "Back to homepage"
+msgstr ""
+
+#: inc/admin-page.php:48
+msgid "Glad to see you here. To start you can read our introduction blog post %1$s. If you are looking for documentation you can find it on %2$s, also our code is very well documented."
+msgstr ""
+
+#: inc/admin-page.php:48
+msgid "here"
+msgstr ""
+
+#: inc/admin-page.php:48, inc/admin-page.php:68, inc/customizer.php:389, inc/template-tags.php:216
+msgid "GitHub"
+msgstr ""
+
+#: inc/admin-page.php:59
+msgid "Theme customization never been easier. Try %s."
+msgstr ""
+
+#: inc/admin-page.php:59
+msgid "customizer"
+msgstr ""
+
+#: inc/admin-page.php:68
+msgid "Want to make more customizations? We prepared child theme for you. Fork it on %s and create custom child theme."
+msgstr ""
+
+#: inc/admin-page.php:94
+msgid "Reload cache"
+msgstr ""
+
+#: inc/admin-page.php:101
+msgid "SliceJack Blog"
+msgstr ""
+
+#: inc/admin-page.php:126
+msgid "Read more posts"
+msgstr ""
+
+#: inc/admin-page.php:152
+msgid "<strong>RSS Error</strong>: %s"
+msgstr ""
+
+#: inc/admin-page.php:169
+msgid "An error has occurred, which probably means the feed is down. Try again later."
+msgstr ""
+
+#: inc/admin-page.php:185
+msgid "Untitled"
+msgstr ""
+
+#: inc/admin-page.php:223
+msgid "Read more"
+msgstr ""
+
+#: inc/admin-page.php:244
+msgid "Found a bug? Create a %s."
+msgstr ""
+
+#: inc/admin-page.php:244
+msgid "new issue"
+msgstr ""
+
+#: inc/admin-page.php:245
+msgid "Want to resolve an issue or create a new feature? Make a %s."
+msgstr ""
+
+#: inc/admin-page.php:245
+msgid "pull request"
+msgstr ""
+
+#: inc/admin-page.php:246
+msgid "For everything else %s."
+msgstr ""
+
+#: inc/admin-page.php:246
+msgid "Github"
+msgstr ""
+
+#: inc/admin-page.php:273
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: inc/admin-page.php:286
+msgid "Click here"
+msgstr ""
+
+#: inc/admin-page.php:294
+msgid "Welcome"
+msgstr ""
+
+#: inc/admin-page.php:295
+msgid "Customize"
+msgstr ""
+
+#: inc/admin-page.php:296
+msgid "Child theme"
+msgstr ""
+
+#: inc/admin-page.php:297
+msgid "Contribute to Pine"
+msgstr ""
+
+#: inc/admin-page.php:298
+msgid "Subscribe to our mailing list"
+msgstr ""
+
+#: inc/admin-page.php:299
+msgid "Slicejack News"
+msgstr ""
+
+#: inc/admin-page.php:302
+msgid "Pine"
+msgstr ""
+
+#: inc/customizer-controls.php:292
+msgid "Move down"
+msgstr ""
+
+#: inc/customizer-controls.php:293
+msgid "Move up"
+msgstr ""
+
+#: inc/customizer-controls.php:294
+msgid "Remove"
+msgstr ""
+
+#: inc/customizer-controls.php:304
+msgid "Custom"
+msgstr ""
+
+#: inc/customizer-controls.php:308
+msgid "Social Network Name"
+msgstr ""
+
+#: inc/customizer-controls.php:311
+msgid "URL"
+msgstr ""
+
+#: inc/customizer-controls.php:316, inc/customizer-controls.php:322
+msgid "New Social Button"
+msgstr ""
+
+#: inc/customizer.php:34
+msgid "Display"
+msgstr ""
+
+#: inc/customizer.php:38
+msgid "Logo"
+msgstr ""
+
+#: inc/customizer.php:39
+msgid "Site Title"
+msgstr ""
+
+#: inc/customizer.php:50
+msgid "Upload a logo"
+msgstr ""
+
+#: inc/customizer.php:63
+msgid "Colors"
+msgstr ""
+
+#: inc/customizer.php:83
+msgid "Color Scheme"
+msgstr ""
+
+#: inc/customizer.php:86
+msgid "Red"
+msgstr ""
+
+#: inc/customizer.php:91
+msgid "Blue"
+msgstr ""
+
+#: inc/customizer.php:96
+msgid "Green"
+msgstr ""
+
+#: inc/customizer.php:101
+msgid "Orange"
+msgstr ""
+
+#: inc/customizer.php:106
+msgid "Purple"
+msgstr ""
+
+#: inc/customizer.php:111
+msgid "Yellow"
+msgstr ""
+
+#: inc/customizer.php:121
+msgid "Layouts"
+msgstr ""
+
+#: inc/customizer.php:135
+msgid "Global"
+msgstr ""
+
+#: inc/customizer.php:139, inc/customizer.php:165, inc/customizer.php:191, inc/customizer.php:217, inc/customizer.php:243, inc/customizer.php:269, inc/customizer.php:295, inc/customizer.php:321
+msgid "None"
+msgstr ""
+
+#: inc/customizer.php:142, inc/customizer.php:168, inc/customizer.php:194, inc/customizer.php:220, inc/customizer.php:246, inc/customizer.php:272, inc/customizer.php:298, inc/customizer.php:324
+msgid "Left"
+msgstr ""
+
+#: inc/customizer.php:145, inc/customizer.php:171, inc/customizer.php:197, inc/customizer.php:223, inc/customizer.php:249, inc/customizer.php:275, inc/customizer.php:301, inc/customizer.php:327
+msgid "Right"
+msgstr ""
+
+#: inc/customizer.php:158
+msgid "Blog"
+msgstr ""
+
+#: inc/customizer.php:162, inc/customizer.php:188, inc/customizer.php:214, inc/customizer.php:240, inc/customizer.php:266, inc/customizer.php:292, inc/customizer.php:318
+msgid "Disabled"
+msgstr ""
+
+#: inc/customizer.php:184
+msgid "Single"
+msgstr ""
+
+#: inc/customizer.php:210
+msgid "Archive"
+msgstr ""
+
+#: inc/customizer.php:236
+msgid "Category archive"
+msgstr ""
+
+#: inc/customizer.php:262
+msgid "Search"
+msgstr ""
+
+#: inc/customizer.php:288
+msgid "404"
+msgstr ""
+
+#: inc/customizer.php:314
+msgid "Default Page"
+msgstr ""
+
+#: inc/customizer.php:335
+msgid "Background"
+msgstr ""
+
+#: inc/customizer.php:339
+msgid "Footer"
+msgstr ""
+
+#: inc/customizer.php:371
+msgid "Social buttons"
+msgstr ""
+
+#: inc/customizer.php:374, inc/template-tags.php:211
+msgid "Facebook"
+msgstr ""
+
+#: inc/customizer.php:377, inc/template-tags.php:212
+msgid "Twitter"
+msgstr ""
+
+#: inc/customizer.php:380, inc/template-tags.php:213
+msgid "LinkedIn"
+msgstr ""
+
+#: inc/customizer.php:383, inc/template-tags.php:214
+msgid "Dribbble"
+msgstr ""
+
+#: inc/customizer.php:386, inc/template-tags.php:215
+msgid "Flickr"
+msgstr ""
+
+#: inc/customizer.php:392, inc/template-tags.php:217
+msgid "Google+"
+msgstr ""
+
+#: inc/customizer.php:395, inc/template-tags.php:218
+msgid "Instagram"
+msgstr ""
+
+#: inc/customizer.php:398, inc/template-tags.php:219
+msgid "Pinterest"
+msgstr ""
+
+#: inc/customizer.php:401, inc/template-tags.php:220
+msgid "StumbleUpon"
+msgstr ""
+
+#: inc/customizer.php:404, inc/template-tags.php:221
+msgid "Skype"
+msgstr ""
+
+#: inc/customizer.php:407, inc/template-tags.php:222
+msgid "Tumblr"
+msgstr ""
+
+#: inc/customizer.php:410, inc/template-tags.php:223
+msgid "Vimeo"
+msgstr ""
+
+#: inc/customizer.php:413, inc/template-tags.php:224
+msgid "Behance"
+msgstr ""
+
+#: inc/template-tags.php:28
+msgctxt "post date"
+msgid " / On %s"
+msgstr ""
+
+#: inc/template-tags.php:33
+msgctxt "post author"
+msgid "By %s"
+msgstr ""
+
+#: inc/template-tags.php:41, inc/template-tags.php:61, inc/template-tags.php:67
+msgid ", "
+msgstr ""
+
+#: inc/template-tags.php:43
+msgid " / In %1$s"
+msgstr ""
+
+#: inc/template-tags.php:63
+msgid "Posted in %1$s"
+msgstr ""
+
+#: inc/template-tags.php:69
+msgid "Tagged %1$s"
+msgstr ""
+
+#: inc/template-tags.php:75
+msgid "Leave a comment"
+msgstr ""
+
+#: inc/template-tags.php:75
+msgid "1 Comment"
+msgstr ""
+
+#: inc/template-tags.php:75
+msgid "% Comments"
+msgstr ""
+
+#: inc/template-tags.php:79, template-parts/content-page.php:18
+msgid "Edit"
+msgstr ""
+
+#: template-parts/content-aside.php:20, template-parts/content-chat.php:30, template-parts/content-link.php:21, template-parts/content-status.php:22, template-parts/content.php:26
+msgid "Read more %s"
+msgstr ""
+
+#: template-parts/content-aside.php:29, template-parts/content-chat.php:36, template-parts/content-link.php:31, template-parts/content-page.php:15, template-parts/content-single-chat.php:19, template-parts/content-single.php:16, template-parts/content-status.php:33, template-parts/content.php:31
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content-none.php:22
+msgid "Ready to publish your first post? %s."
+msgstr ""
+
+#: template-parts/content-none.php:23
+msgid "Get started here"
+msgstr ""
+
+#: template-parts/content-none.php:28
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:33
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
