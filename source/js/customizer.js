@@ -81,8 +81,8 @@
 	wp.customize( 'pine_footer_social_buttons', function( value ) {
 		value.bind( function( to ) {
 			var socialButtons = '';
-			$.each( to, function( i, social_button ) {
-				socialButtons += '<li class="' + social_button.cssClass + '-ico social-nav__item btn--transition"><a class="social-nav__link" href="' + social_button.url + '" title="' + social_button.social + '" target="_blank"><i class="fa fa-' + ( social_button.social + '' ).toLowerCase() + '"></i></a></li>\n';
+			$.each( to, function( i, socialButton ) {
+				socialButtons += '<li class="' + socialButton.cssClass + '-ico social-nav__item btn--transition"><a class="social-nav__link" href="' + socialButton.url + '" title="' + socialButton.social + '" target="_blank"><i class="fa fa-' + ( socialButton.social + '' ).toLowerCase() + '"></i></a></li>\n';
 			} );
 
 			$( '.footer ul.social-nav' ).html( socialButtons );
@@ -129,8 +129,9 @@
 			$sidebar = $( '.pine-sidebar-class' );
 
 	var handleLayout = function() {
-		if ( ! $main.length || !$sidebar.length )
+		if ( ! $main.length || !$sidebar.length ) {
 			return;
+		}
 
 		var pageLayout = getPageLayout();
 
@@ -178,12 +179,12 @@
 
 
 	/* Colors */
-	function lighten( color, amount ) {
+	/*function lighten( color, amount ) {
 		color = new less.tree.Color( color.replace( '#', '' ) );
 		amount = new(less.tree.Dimension)( amount, '%' );
 
 		return less.functions.functionRegistry._data.lighten( color, amount ).toRGB();
-	}
+	}*/
 
 	function darken( color, amount ) {
 		amount = new(less.tree.Dimension)( amount, '%' );
