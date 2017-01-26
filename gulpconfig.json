@@ -2,119 +2,103 @@
     "watch": [
         {
             "files"    : "source/less/**/*.less",
-            "run"      : [ "less" ],
-            "target"   : "default"
+            "build" : { "less" : "default" }
         },
         {
             "files"   : "source/js/scripts.js",
-            "run"     : [ "js" ],
-            "target"  : "default"
+            "build" : { "js" : "default" }
         },
         {
             "files"   : [
                 "source/js/vendor/**/*.js",
                 "source/js/vendors.js"
             ],
-            "run"     : [ "js" ],
-            "target"  : "vendors"
+            "build" : { "js" : "vendors" }
         },
         {
             "files"   : "source/js/customizer.js",
-            "run"     : [ "js" ],
-            "target"  : "customizer"
+            "build" : { "js" : "customizer" }
         },
         {
             "files"    : "source/admin/less/**/*.less",
-            "run"      : [ "less" ],
-            "target"   : "admin"
+            "build" : { "less" : "admin" }
         },
         {
             "files"    : "source/admin/js/**/*.js",
-            "run"      : [ "js" ],
-            "target"   : "admin"
+            "build" : { "js" : "admin" }
         }
     ],
-    "less": {
-        "default": {
-            "files": {
+    "build": {
+        "less": {
+            "default": {
                 "source/less/font-awesome.less": [
-                    "css/font-awesome.css"
+                    "css"
                 ],
                 "source/less/style.less": [
-                    "css/style.css"
+                    "css"
                 ],
                 "source/less/color-blue.less": [
-                    "css/color-blue.css"
+                    "css"
                 ],
                 "source/less/color-green.less": [
-                    "css/color-green.css"
+                    "css"
                 ],
                 "source/less/color-orange.less": [
-                    "css/color-orange.css"
+                    "css"
                 ],
                 "source/less/color-purple.less": [
-                    "css/color-purple.css"
+                    "css"
                 ],
                 "source/less/color-yellow.less": [
-                    "css/color-yellow.css"
+                    "css"
                 ]
-            }
-        },
-        "admin": {
-            "files": {
+            },
+            "admin": {
                 "source/admin/less/pine-customize-control-color-scheme.less": [
-                    "admin/css/pine-customize-control-color-scheme.css"
+                    "admin/css"
                 ],
                 "source/admin/less/pine-customize-control-layout.less": [
-                    "admin/css/pine-customize-control-layout.css"
+                    "admin/css"
                 ],
                 "source/admin/less/pine-customize-control-social-buttons.less": [
-                    "admin/css/pine-customize-control-social-buttons.css"
+                    "admin/css"
                 ],
                 "source/admin/less/pine-editor.less": [
-                    "admin/css/pine-editor.css"
+                    "admin/css"
                 ],
-                "source/admin/less/admin-page.less": [
-                    "admin/css/pine-admin-page.css"
+                "source/admin/less/pine-admin-page.less": [
+                    "admin/css"
                 ]
             }
-        }
-    },
-    "js": {
-        "default": {
-            "files": {
+        },
+        "js": {
+            "default": {
                 "source/js/scripts.js": [
-                    "js/scripts.js"
+                    "js"
                 ]
-            }
-        },
-        "vendors": {
-            "files": {
+            },
+            "vendors": {
                 "source/js/vendors.js": [
-                    "js/vendors.js"
+                    "js"
                 ]
-            }
-        },
-        "customizer": {
-            "files": {
+            },
+            "customizer": {
                 "source/js/customizer.js": [
-                    "js/customizer.js"
+                    "js"
                 ]
-            }
-        },
-        "admin": {
-            "files": {
+            },
+            "admin": {
                 "source/admin/js/pine-customize-control-color-scheme.js": [
-                    "admin/js/pine-customize-control-color-scheme.js"
+                    "admin/js"
                 ],
                 "source/admin/js/pine-customize-control-layout.js": [
-                    "admin/js/pine-customize-control-layout.js"
+                    "admin/js"
                 ],
                 "source/admin/js/pine-customize-control-social-buttons.js": [
-                    "admin/js/pine-customize-control-social-buttons.js"
+                    "admin/js"
                 ],
                 "source/admin/js/pine-less.js": [
-                    "admin/js/pine-less.js"
+                    "admin/js"
                 ]
             }
         }

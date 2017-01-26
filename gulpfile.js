@@ -1,184 +1,184 @@
-var browserslist, include, less, minifyCSS, uglify, autoprefix, postcss, mqpacker, logWarnings;
-var browsers     = {
-	browsers: '> 1%, last 2 versions, IE >= 8, Firefox ESR, Opera 12.1',
-	remove: false
-};
-var config       = require('./gulpconfig.json');
-var gulp         = require('gulp');
-var rename       = require('gulp-rename');
-var plumber      = require('gulp-plumber');
-var gutil        = require('gulp-util');
+/* global require: false, Buffer: false */
+var config = require( './gulpconfig.json' ),
+	tasks = {
+		js: [],
+		less: [],
+		svg: [],
+		colors: [],
+	},
+	through = require( 'through2' ),
+	// exec = require( 'child_process' ).exec,
+	gulp = require( 'gulp' ),
+	// gulpDebug = require( 'gulp-debug' ),
+	touch = require( 'gulp-touch' ),
+	plumber = require( 'gulp-plumber' ),
+	gutil = require( 'gulp-util' ),
+	notify = require( 'gulp-notify' ),
+	rename = require( 'gulp-rename' ),
+	less = require( 'gulp-less' ),
+	include = require( 'gulp-include' ),
+	rename = require( 'gulp-rename' ),
+	LessPluginAutoPrefix = require( 'less-plugin-autoprefix' ),
+	CombineMediaQueries = require( 'less-plugin-group-css-media-queries' ),
+	zip = require( 'gulp-zip' ),
+	wpPot = require( 'gulp-wp-pot' ),
+	Autoprefix = new LessPluginAutoPrefix( { browsers: [ '> 5%', 'last 2 versions', 'Firefox ESR', 'not ie < 10' ], remove: false } ),
+	LessPlugins = [ CombineMediaQueries, Autoprefix ];
 
-function loadJSModules() {
-	include = require('gulp-include');
-	uglify = require('gulp-uglify');
+for ( var group in config.build.less ) {
+	tasks.less.push( 'build:less:' + group );
 }
 
-function loadLessModules() {
-	browserslist = require('browserslist');
-	less = require('gulp-less');
-	minifyCSS = require('gulp-minify-css');
-	postcss = require('gulp-postcss');
-	autoprefix = require('autoprefixer');
-	mqpacker = require('css-mqpacker');
-	logWarnings = require('postcss-log-warnings');
+for ( var group in config.build.js ) {
+	tasks.js.push( 'build:js:' + group );
 }
 
-function logStartMsg(name, target) {
-	gutil.log("Starting '" + gutil.colors.cyan(name + "::" + target) + "'...");
-}
+tasks.less.forEach( function( task ) {
+	'use strict';
 
-function logEndMsg(name, target, timeStart, timeEnd) {
-	gutil.log("Finished '" + gutil.colors.cyan(name + "::" + target) + "' after " + gutil.colors.magenta((timeEnd - timeStart) + " ms"));
-}
+	gulp.task( task, function( done ) {
+		var group = task.split( ':' ).pop();
 
-function getFilenameByPath(path) {
-   return path.split(/[\\/]/).pop();
-}
-
-function getDirectoryByPath(path) {
-	parts = path.split(/[\\/]/);
-	parts.pop();
-
-	return parts.join('/');
-}
-
-function getTarget() {
-	target = 'default';
-	arguments = process.argv;
-	arguments.forEach(function(value, index, array){
-		if (value.indexOf('--target=') > -1) {
-			target = value.replace('--target=', '');
+		for ( var src in config.build.less[ group ] ) {
+			var pipeline = gulp.src( src )
+				.pipe( plumber( {
+					errorHandler: notify.onError( {
+						title: 'Error running ' + task,
+						message: '<%= error.message %>'
+					} ) }
+				) )
+				.pipe( less( { plugins: LessPlugins } ) )
+				.pipe( rename( src.split( '/' ).pop().replace( '.less', '.css' ) ) )
+			;
+			config.build.less[ group ][ src ].forEach( function( path ) {
+				pipeline.pipe( gulp.dest( path ) )
+				.pipe( touch() );
+			} );
 		}
-	});
 
-	return target;
-}
+		done();
+	} );
+} );
+gulp.task( 'build:less', gulp.parallel( tasks.less ) );
 
-function compileLESS(target) {
-	var timeStart, timeEnd;
-	timeStart = new Date();
-	logStartMsg('less', target);
-	for(src in config.less[target].files) {
-		dest = config.less[target].files[src];
-		if (dest.constructor !== Array)
-			dest = Array(dest);
-		dest.forEach(function(destination){
-			if (getFilenameByPath(destination).indexOf('.min.') > -1) {
-				gulp.src(src)
-					.pipe(plumber(function(error) {
-						gutil.log(gutil.colors.red('Error: ' + error.message));
-						this.emit('end');
-					}))
-					.pipe(less())
-					.pipe(postcss(
-						[
-							mqpacker({sort: true}),
-							autoprefix(browsers),
-							logWarnings()
-						]
-					))
-					.pipe(minifyCSS({
-						keepSpecialComments: false
-					}))
-					.pipe(rename(getFilenameByPath(destination)))
-					.pipe(gulp.dest(getDirectoryByPath(destination)))
-				;
-			} else {
-				gulp.src(src)
-					.pipe(plumber(function(error) {
-						gutil.log(gutil.colors.red('Error: ' + error.message));
-						this.emit('end');
-					}))
-					.pipe(less())
-					.pipe(postcss(
-						[
-							mqpacker({sort: true}),
-							autoprefix(browsers),
-							logWarnings()
-						]
-					))
-					.pipe(rename(getFilenameByPath(destination)))
-					.pipe(gulp.dest(getDirectoryByPath(destination)))
-				;
-			}
-		});
-	}
-	timeEnd = new Date();
-	logEndMsg('less', target, timeStart, timeEnd);
-}
+tasks.js.forEach( function( task ) {
+	'use strict';
 
-function compileJS(target) {
-	var timeStart, timeEnd;
-	timeStart = new Date();
-	logStartMsg('js', target);
-	for(src in config.js[target].files) {
-		dest = config.js[target].files[src];
-		if (dest.constructor !== Array)
-			dest = Array(dest);
-		dest.forEach(function(destination){
-			if (getFilenameByPath(destination).indexOf('.min.') > -1) {
-				gulp.src(src)
-					.pipe(plumber(function(error) {
-						gutil.log(gutil.colors.red('Error: ' + error.message));
-						this.emit('end');
-					}))
-					.pipe(include())
-					.pipe(uglify())
-					.pipe(rename(getFilenameByPath(destination)))
-					.pipe(gulp.dest(getDirectoryByPath(destination)))
-				;
-			} else {
-				gulp.src(src)
-					.pipe(plumber(function(error) {
-						gutil.log(gutil.colors.red('Error: ' + error.message));
-						this.emit('end');
-					}))
-					.pipe(include())
-					.pipe(rename(getFilenameByPath(destination)))
-					.pipe(gulp.dest(getDirectoryByPath(destination)))
-				;
-			}
-		});
-	}
-	timeEnd = new Date();
-	logEndMsg('js', target, timeStart, timeEnd);
-}
+	gulp.task( task, function( done ) {
+		var group = task.split(':').pop();
 
-gulp.task('js', function(){
-	loadJSModules();
-	compileJS(getTarget())
-});
+		for ( var src in config.build.js[ group ] ) {
+			var pipeline = gulp.src( src )
+				.pipe( plumber( {
+					errorHandler: notify.onError( {
+						title: 'Error running ' + task,
+						message: "<%= error.message %> in line no. <%= error.lineNumber %>"
+					} )
+				} ) )
+				.pipe( include() )
+				.pipe( rename( src.split( '/' ).pop() ) )
+			;
 
-gulp.task('less', function(){
-	loadLessModules();
-	compileLESS(getTarget());
-});
+			config.build.js[ group ][ src ].forEach( function( path ) {
+				pipeline.pipe( gulp.dest( path ) );
+			} );
+		}
 
-gulp.task('watch', function () {
-	loadJSModules();
-	loadLessModules();
-	config.watch.forEach(function(o){
-		var observed = o;
-		gulp.watch(observed.files, function(){
-			observed.run.forEach(function(task){
-				if (task == 'less') {
-					compileLESS(observed.target);
-				} else if ( task == 'js') {
-					compileJS(observed.target);
+		done();
+	} );
+} );
+gulp.task( 'build:js', gulp.parallel( tasks.js ) );
+
+gulp.task( 'zip:wordpressorg', function() {
+	'use strict';
+
+	return gulp.src( [
+		'./**/*',
+		'!*.DS_Store',
+		'!.git/**',
+		'!*.git',
+		'!*.jshintrc',
+		'!gulpconfig.json',
+		'!gulpfile.js',
+		'!package.json',
+		'!languages/**',
+		'!languages',
+		'!node_modules/**',
+		'!node_modules',
+		'!npm-debug.log',
+		'!dist/**',
+		'!dist',
+		'!source/**',
+		'!source',
+	] )
+		.pipe( zip( 'pine.zip' ) )
+		.pipe( gulp.dest( 'dist/wordpressorg' ) );
+} );
+
+gulp.task( 'makepot:default', function() {
+	'use strict';
+
+	return gulp.src( [
+			'./**/*.php',
+			'!dev/**',
+			'!node_modules/**',
+			'!.git/**',
+			'!lib/acf/**',
+		] )
+		.pipe( wpPot( {
+			domain: 'pine',
+			package: 'Pine 1.0.8',
+			bugReport: 'https://wordpress.org/support/theme/pine',
+			lastTranslator: 'Themejack <support@themejack.com>',
+			team: 'Themejack <support@themejack.com>',
+		} ) )
+		.pipe( through.obj( function( file, enc, callback ) {
+				if ( file.isNull() ) {
+					return callback( null, file );
 				}
-			});
-		});
-	});
-});
 
-gulp.task('default', function() {
-	var p;
-	var spawn = require('child_process').spawn;
-	var spawnChildren = function(e) {
-		if (p) { p.kill(); }
-		p = spawn('npm', ['run', 'gulp:watch'], {stdio: 'inherit'});
-	}
-	gulp.watch('gulpconfig.json', spawnChildren);
-	spawnChildren();
-});
+				if ( file.isStream() ) {
+					return callback( null, file );
+				}
+
+				if ( file.isBuffer() ) {
+					var content = file.contents.toString();
+					var lines = content.split( '\n' );
+
+					lines.splice( 0, 2 );
+
+					content = `# Copyright (C) 2017 Themejack
+# This file is distributed under the GNU General Public License v2 or later.
+` + lines.join( '\n' );
+
+					file.contents = new Buffer( content );
+
+					this.push( file );
+				}
+
+				callback();
+		} ) )
+		.pipe( gulp.dest( 'languages/pine.pot' ) );
+} );
+
+function watch() {
+	'use strict';
+
+	config.watch.forEach( function( obj ) {
+		for ( var group in obj.build ) {
+			gutil.log( gutil.colors.cyan( 'Watching ' + obj.files ) );
+
+			gulp.watch( obj.files, gulp.series(
+				'build:' + group + ':' + obj.build[ group ]
+			) );
+		}
+	} );
+}
+
+gulp.task( 'default', gulp.parallel( [ 'build:less', 'build:js' ] ) );
+gulp.task( 'build', gulp.parallel( [ 'build:less', 'build:js' ] ) );
+gulp.task( 'build:all', gulp.parallel( [ 'build:less', 'build:js' ] ) );
+gulp.task( 'makepot', gulp.series( [ 'makepot:default' ] ) );
+gulp.task( 'watch', watch );
+gulp.task( 'init', gulp.parallel( [ 'build:less', 'build:js' ] ) );
+gulp.task( 'zip', gulp.series( [ 'init', 'makepot', 'zip:wordpressorg' ] ) );
