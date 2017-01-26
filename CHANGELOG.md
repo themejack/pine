@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.9] - 2017-01-26
+### Added
+- Merge Dev and Master branches
+- Subscribe to newsletter form on theme admin page
+
+### Fixed
+- Code style
+- Footer social buttons issue #7
+
 ## [1.0.8] - 2016-08-08
 ### Fixed
 - Fix some code missing in last version

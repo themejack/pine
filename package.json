@@ -1,6 +1,6 @@
 {
   "name": "pine",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Pine is free minimalist WordPress portfolio theme created for people who want to show their work on simple and creative way. Pine is made for a freelancers, designers or smaller agencies who are looking for elegant, professional and minimal look.",
   "main": "gulpfile.js",
   "scripts": {

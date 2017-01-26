@@ -299,7 +299,7 @@ function pine_admin_page() {
 	add_meta_box( 'dashboard_slicejack', __( 'Slicejack News', 'pine' ), 'pine_sj_dashboard_widget', $screen->id, 'side', 'high' );
 	?>
 	<div class="wrap" id="pine-wrap">
-		<h1 class="page-title"><?php esc_html_e( 'Pine', 'pine' ); ?> <sup class="version">1.0.6</sup></h1>
+		<h1 class="page-title"><?php esc_html_e( 'Pine', 'pine' ); ?> <sup class="version">1.0.9</sup></h1>
 		<div id="dashboard-widgets-wrap">
 			<div id="dashboard-widgets" class="metabox-holder columns-2">
 				<div id="postbox-container-1" class="postbox-container">
