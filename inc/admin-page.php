@@ -45,10 +45,7 @@ add_action( 'admin_enqueue_scripts', 'pine_admin_page_scripts', 10, 1 );
  */
 function pine_welcome_metabox() {
 	?>
-	<p><?php printf(
-		esc_html__( 'Glad to see you here. To start you can read our introduction blog post %s. If you are looking for documentation you can find it on %s, also our code is very well documented.', 'pine' ),
-		'<a href="http://slicejack.com/pine-free-minimalist-wordpress-portfolio-theme" target="_blank">' . esc_html__( 'here', 'pine' ) . '</a>', '<a href="https://github.com/themejack/pine" target="_blank">' . esc_html__( 'GitHub', 'pine' ) . '</a>'
-	); ?></p>
+	<p><?php printf( esc_html__( 'Glad to see you here. To start you can read our introduction blog post %1$s. If you are looking for documentation you can find it on %2$s, also our code is very well documented.', 'pine' ), '<a href="http://slicejack.com/pine-free-minimalist-wordpress-portfolio-theme" target="_blank">' . esc_html__( 'here', 'pine' ) . '</a>', '<a href="https://github.com/themejack/pine" target="_blank">' . esc_html__( 'GitHub', 'pine' ) . '</a>' ); ?></p>
 	<p class="github-buttons"><a class="github-button" href="https://github.com/themejack" data-count-href="/themejack/followers" data-count-api="/users/themejack#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @themejack on GitHub">Follow @themejack</a> <a class="github-button" href="https://github.com/themejack/pine" data-icon="octicon-star" data-count-href="/themejack/pine/stargazers" data-count-api="/repos/themejack/pine#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star themejack/pine on GitHub">Star</a>
 	</p>
 	<?php
@@ -59,13 +56,7 @@ function pine_welcome_metabox() {
  */
 function pine_customize_metabox() {
 	?>
-	<p><?php printf(
-		esc_html__( 'Theme customization never been easier. Try %s.', 'pine' ),
-		'<a href="' . esc_url( add_query_arg(
-			array( 'return' => urlencode( 'themes.php/?page=pine' ) ),
-			admin_url( '/customize.php' )
-		) ) . '">' . esc_html__( 'customizer', 'pine' ) . '</a>'
-	); ?></p>
+	<p><?php printf( esc_html__( 'Theme customization never been easier. Try %s.', 'pine' ), '<a href="' . esc_url( add_query_arg( array( 'return' => urlencode( 'themes.php/?page=pine' ) ), admin_url( '/customize.php' ) ) ) . '">' . esc_html__( 'customizer', 'pine' ) . '</a>' ); ?></p>
 <?php
 }
 
@@ -74,10 +65,7 @@ function pine_customize_metabox() {
  */
 function pine_child_theme_metabox() {
 	?>
-	<p><?php printf(
-		esc_html__( 'Want to make more customizations? We prepared child theme for you. Fork it on %s and create custom child theme.', 'pine' ),
-		'<a href="https://github.com/themejack/pine-child" target="_blank">' . esc_html__( 'GitHub', 'pine' ) . '</a>'
-	); ?></p>
+	<p><?php printf( esc_html__( 'Want to make more customizations? We prepared child theme for you. Fork it on %s and create custom child theme.', 'pine' ), '<a href="https://github.com/themejack/pine-child" target="_blank">' . esc_html__( 'GitHub', 'pine' ) . '</a>' ); ?></p>
 	<p class="github-buttons"><a class="github-button" href="https://github.com/themejack/pine-child/fork" data-icon="octicon-repo-forked" data-count-href="/themejack/pine-child/network" data-count-api="/repos/themejack/pine-child#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork themejack/pine-child on GitHub">Fork</a> <a class="github-button" href="https://github.com/themejack/pine-child/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download themejack/pine-child on GitHub">Download child theme</a>
 	</p>
 <?php
@@ -107,14 +95,14 @@ function pine_sj_dashboard_widget() {
 	</div>
 <?php
 	$feed = array(
-		'type' => '',
-		'link' => 'http://slicejack.com',
-		'url' => 'http://slicejack.com/?feed=rss2',
-		'title' => __( 'SliceJack Blog', 'pine' ),
-		'items' => 5,
+		'type'         => '',
+		'link'         => 'http://slicejack.com',
+		'url'          => 'http://slicejack.com/?feed=rss2',
+		'title'        => __( 'SliceJack Blog', 'pine' ),
+		'items'        => 5,
 		'show_summary' => 1,
-		'show_author' => 0,
-		'show_date' => 1,
+		'show_author'  => 0,
+		'show_date'    => 1,
 	);
 
 	define( 'DOING_AJAX', true );
@@ -262,6 +250,23 @@ function pine_contribute_metabox() {
 }
 
 /**
+ * Newsletter metabox
+ */
+function pine_newsletter_metabox() {
+	?>
+	<form action="//themejack.us3.list-manage.com/subscribe/post?u=4cb93458932f8621f1d708c6b&amp;id=747bf242f3" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+		<div id="mc_embed_signup_scroll">
+			<label for="mce-EMAIL">Subscribe to our mailing list</label>
+			<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+			<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+			<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_4cb93458932f8621f1d708c6b_747bf242f3" tabindex="-1" value=""></div>
+			<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+		</div>
+	</form>
+	<?php
+}
+
+/**
  * Pine admin page
  */
 function pine_admin_page() {
@@ -273,7 +278,9 @@ function pine_admin_page() {
 		pine_delete_dashboard_cached_rss_widget( 'dashboard_slicejack' );
 		?>
 		<script type="text/javascript">
+			/* jshint ignore:start */
 			window.location = '<?php echo esc_url( admin_url( 'themes.php?page=pine' ) ); ?>';
+			/* jshint ignore:end */
 		</script>
 		<?php // Add anchore for situations when javascript is disabled. ?>
 		<div class="wrap">
@@ -290,6 +297,7 @@ function pine_admin_page() {
 	add_meta_box( 'pine_child_theme', __( 'Child theme', 'pine' ), 'pine_child_theme_metabox', $screen->id, 'normal' );
 	add_meta_box( 'pine_contribute', __( 'Contribute to Pine', 'pine' ), 'pine_contribute_metabox', $screen->id, 'normal' );
 	add_meta_box( 'dashboard_slicejack', __( 'Slicejack News', 'pine' ), 'pine_sj_dashboard_widget', $screen->id, 'side', 'high' );
+	add_meta_box( 'pine_newsletter', __( 'Newsletter', 'pine' ), 'pine_newsletter_metabox', $screen->id, 'side', 'high' );
 	?>
 	<div class="wrap" id="pine-wrap">
 		<h1 class="page-title"><?php esc_html_e( 'Pine', 'pine' ); ?> <sup class="version">1.0.6</sup></h1>
