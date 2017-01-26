@@ -3185,7 +3185,6 @@ return Outlayer;
 
 }));
 
-
 /*!
  * Isotope PACKAGED v2.2.2
  *
@@ -7444,7 +7443,6 @@ var getText = docElem.textContent ?
 }));
 
 
-
 /*
  * BackgroundCheck
  * http://kennethcachia.com/background-check
@@ -8322,7 +8320,6 @@ var getText = docElem.textContent ?
   };
 
 }));
-
 /**
  * skip-link-focus-fix.js
  *
@@ -8354,4 +8351,3 @@ var getText = docElem.textContent ?
 		}, false );
 	}
 })();
-

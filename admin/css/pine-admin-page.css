@@ -1,12 +1,14 @@
 /**
  * Admin page styles
  */
+
 #pine-wrap .page-title {
   font-weight: 700;
   font-size: 3em;
   line-height: 1.2;
   font-family: 'Lato', sans-serif;
 }
+
 #pine-wrap .page-title .version {
   padding: 2px 4px;
   background: #fff;
@@ -14,10 +16,12 @@
   font-weight: 700;
   border-radius: 2px;
 }
+
 #pine-wrap .page-footer {
   text-align: center;
   margin-top: 2em;
 }
+
 #pine-wrap .page-footer .developer {
   display: inline-block;
   text-transform: uppercase;
@@ -25,15 +29,19 @@
   color: #ddd;
   font-size: 2em;
 }
+
 #pine-wrap .page-footer .developer a {
   display: inline-block;
 }
+
 #pine-wrap .tabs ul {
   list-style: none;
 }
+
 #pine-wrap .tabs li {
   display: inline-block;
 }
+
 #pine-wrap .tabs li a {
   display: inline-block;
   vertical-align: middle;
@@ -48,12 +56,14 @@
   background: #f0f0f0;
   color: #777;
 }
+
 #pine-wrap .tabs li a:hover,
 #pine-wrap .tabs li a:focus {
   background: #0073aa;
   color: #fff;
   border-color: #006291;
 }
+
 #pine-wrap .tabs li.active a,
 #pine-wrap .tabs li.active a:hover,
 #pine-wrap .tabs li.active a:focus {
@@ -62,33 +72,41 @@
   cursor: default;
   border-color: #e5e5e5;
 }
+
 #pine-wrap .news-actions {
   text-align: right;
   margin-bottom: -20px;
 }
+
 #pine-wrap .news-actions .reload-cache {
   display: inline-block;
   color: #a0a5aa;
 }
+
 #pine-wrap .news-actions .reload-cache:hover,
 #pine-wrap .news-actions .reload-cache:focus {
   color: #777;
 }
+
 #pine-wrap iframe {
   display: inline-block;
 }
+
 #pine-wrap .github-buttons {
   min-height: 20px;
   line-height: 0;
 }
+
 #pine-wrap .github-button {
   display: inline-block;
   visibility: hidden;
   height: 20px;
 }
+
 #pine-wrap #mc-subscribe-button {
   margin-top: 5px;
 }
+
 @media only screen and (min-width: 1500px) and (max-width: 1800px) {
   #wpbody-content #pine-wrap #dashboard-widgets #postbox-container-1 {
     width: 49.5%;
