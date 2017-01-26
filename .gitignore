@@ -1,13 +1,7 @@
 # OS stuff
 .DS_Store
 
-# Development files
-/source
-gulpfile.js
-gulpconfig.json
-package.json
-jsconfig.json
-
 # node modules
-/node_modules
+node_modules
 npm-debug.log
+

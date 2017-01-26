@@ -286,17 +286,15 @@ class Pine_Social_Buttons_Control extends WP_Customize_Control {
 		<div class="customize-control-content">
 			<script type="text/html" id="tmpl-social-button">
 				<div class="social-button">
-				<#
-						var social_value = data.social == 'custom' ? data.social_value : data.social;
-					#>
+				<# var socialValue = data.social == 'custom' ? data.socialValue : data.social; #>
 					<div class="preview">
-						<div class="social-button-preview"><div class="social-icon<# if ( data.css_class ) { #> social-icons--{{ data.css_class }}<# } #>"></div><div class="social-value">{{ social_value }}</div></div>
+						<div class="social-button-preview"><div class="social-icon<# if ( data.cssClass ) { #> social-icons--{{ data.cssClass }}<# } #>"></div><div class="social-value">{{ socialValue }}</div></div>
 						<div class="reorder-button move-down"><?php esc_html_e( 'Move down', 'pine' ); ?></div>
 						<div class="reorder-button move-up"><?php esc_html_e( 'Move up', 'pine' ); ?></div>
 						<div class="remove-button"><?php esc_html_e( 'Remove', 'pine' ); ?></div>
 					</div>
 					<div class="fields"<# if ( !data.editing ) { #> style="display: none"<# } #>>
-						<input type="hidden" class="css-class"<# if ( data.css_class ) { #> value="{{ data.css_class }}"<# } #>>
+						<input type="hidden" class="css-class"<# if ( data.cssClass ) { #> value="{{ data.cssClass }}"<# } #>>
 						<select class="social">
 						<?php foreach ( $this->socials as $value => $social ) : ?>
 							<option value="<?php echo esc_attr( $value ); ?>"<# if ( data.social == '<?php echo esc_attr( $value ); ?>' ) { #> selected="selected"<# } #>><?php echo esc_html( $social['label'] ); ?></option>
@@ -307,7 +305,7 @@ class Pine_Social_Buttons_Control extends WP_Customize_Control {
 						</select>
 						<br /><br />
 						<div class="custom-social"<# if ( data.social != 'custom' ) { #>  style="display: none"<# } #>>
-							<input type="text" placeholder="<?php echo esc_attr( __( 'Social Network Name', 'pine' ) ); ?>"<# if ( data.css_class ) { #> value="{{ data.css_class }}"<# } #> />
+							<input type="text" placeholder="<?php echo esc_attr( __( 'Social Network Name', 'pine' ) ); ?>"<# if ( data.cssClass ) { #> value="{{ data.cssClass }}"<# } #> />
 							<br /><br />
 						</div>
 						<input type="text" placeholder="<?php echo esc_attr( __( 'URL', 'pine' ) ); ?>" class="url"<# if ( data.url ) { #> value="{{ data.url }}"<# } #> />

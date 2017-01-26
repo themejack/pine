@@ -344,22 +344,22 @@ function pine_customize_register( $wp_customize ) {
 		'default' => array(
 			array(
 				'social' => 'facebook',
-				'css_class' => 'facebook',
+				'cssClass' => 'facebook',
 				'url' => '#',
 			),
 			array(
 				'social' => 'twitter',
-				'css_class' => 'twitter',
+				'cssClass' => 'twitter',
 				'url' => '#',
 			),
 			array(
 				'social' => 'dribbble',
-				'css_class' => 'dribbble',
+				'cssClass' => 'dribbble',
 				'url' => '#',
 			),
 			array(
 				'social' => 'github',
-				'css_class' => 'github',
+				'cssClass' => 'github',
 				'url' => '#',
 			),
 		),
@@ -423,6 +423,6 @@ add_action( 'customize_register', 'pine_customize_register' );
  */
 function pine_customize_preview_js() {
 	wp_enqueue_script( 'pine_lessjs', get_template_directory_uri() . '/admin/js/pine-less.js', array(), '2.5.1', true );
-	wp_enqueue_script( 'pine_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview', 'pine_lessjs' ), '20130508', true );
+	wp_enqueue_script( 'pine_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview', 'pine_lessjs' ), '20170126', true );
 }
 add_action( 'customize_preview_init', 'pine_customize_preview_js' );

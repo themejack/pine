@@ -227,8 +227,8 @@ if ( ! function_exists( 'pine_social_icons' ) ) :
 		<ul class="social-nav clearfix">
 		<?php
 		foreach ( $pine_footer_social_buttons as $social_button ) :
-			if ( isset( $social_button['css_class'] ) && isset( $social_button['url'] ) && isset( $social_button['social'] ) ) : ?>
-			<li class="<?php echo esc_attr( $social_button['css_class'] . '-ico social-nav__item btn--transition' ); ?>">
+			if ( isset( $social_button['cssClass'] ) && isset( $social_button['url'] ) && isset( $social_button['social'] ) ) : ?>
+			<li class="<?php echo esc_attr( $social_button['cssClass'] . '-ico social-nav__item btn--transition' ); ?>">
 				<a class="social-nav__link" href="<?php echo esc_url( $social_button['url'] ); ?>" title="<?php echo esc_attr( isset( $social_buttons_default_titles[ $social_button['social'] ] ) ? $social_buttons_default_titles[ $social_button['social'] ] : $social_button['social'] ); ?>" target="_blank">
 					<i class="<?php echo esc_attr( 'fa fa-' . strtolower( $social_button['social'] ) ); ?>"></i>
 				</a>

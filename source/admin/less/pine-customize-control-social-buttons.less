@@ -1,0 +1,170 @@
+@font-face {
+	font-family: 'FontAwesome';
+	src: url("../../fonts/fontawesome-webfont.eot?v=4.2.0");
+	src: url("../../fonts/fontawesome-webfont.eot?#iefix&v=4.2.0") format("embedded-opentype"), url("../../fonts/fontawesome-webfont.woff?v=4.2.0") format("woff"), url("../../fonts/fontawesome-webfont.ttf?v=4.2.0") format("truetype"), url("../../fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular") format("svg");
+	font-weight: normal;
+	font-style: normal
+}
+.customize-control-social-buttons .social-buttons .social-button {
+	display: inline-block;
+	width: 100%;
+
+	.preview {
+		float: none;
+		padding: 10px;
+		height: 48px;
+		background: #fafafa;
+		border-color: #999;
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+		box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+		box-sizing: border-box;
+
+		> div {
+			float: left;
+			text-indent: -9999px;
+			width: 15%;
+			height: 28px;
+			font-size: 13px;
+			position: relative;
+			cursor: pointer;
+
+			&.social-button-preview {
+				width: 55%;
+				line-height: 28px;
+				color: #292929;
+
+				> .social-icon {
+					display: block;
+					float: left;
+					width: 28px;
+					height: 28px;
+					font-size: 14px;
+					line-height: 28px;
+					text-align: center;
+					background-color: #292929;
+					background-position: center center;
+					background-repeat: no-repeat;
+					border-radius: 50%;
+					-webkit-border-radius: 50%;
+					-moz-border-radius: 50%;
+					position: relative;
+
+					&:before {
+						font-family: FontAwesome;
+						color: #fff;
+						text-indent: 0;
+						display: block;
+					}
+
+					&.social-icons-- {
+						&dribbble:before {
+							content: "\f17d"
+						}
+						&delicious:before {
+							content: "\f1a5"
+						}
+						&digg:before {
+							content: "\f1a6"
+						}
+						&facebook:before {
+							content: "\f09a"
+						}
+						&flickr:before {
+							content: "\f16e"
+						}
+						&github:before {
+							content: "\f113"
+						}
+						&googleplus:before {
+							content: "\f0d5"
+						}
+						&instagram:before {
+							content: "\f16d"
+						}
+						&linkedin:before {
+							content: "\f0e1"
+						}
+						&pinterest:before {
+							content: "\f0d2"
+						}
+						&stumbleupon:before {
+							content: "\f1a4"
+						}
+						&skype:before {
+							content: "\f17e"
+						}
+						&twitter:before {
+							content: "\f099"
+						}
+						&tumblr:before {
+							content: "\f173"
+						}
+						&vimeo:before {
+							content: "\f194"
+						}
+						&behance:before {
+							content: "\f1b4"
+						}
+					}
+				}
+
+				> .social-value {
+					float: left;
+					text-indent: 10px;
+				}
+
+				&:hover {
+					> .social-icon {
+						background-color: #ff2400;
+					}
+
+					> .social-value {
+						color: #ff2400;
+					}
+				}
+			}
+		}
+
+
+		.reorder-button, .remove-button {
+			&:before {
+				display: inline-block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 28px;
+				height: 100%;
+				font: normal 30px 'dashicons';
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-indent: 0;
+			}
+
+			&.move-down:before {
+				content: '\f347';
+			}
+
+			&.move-up:before {
+				content: '\f343';
+			}
+
+			&.remove-button:before {
+				content: "\f158";
+			}
+		}
+	}
+
+	&:first-of-type .preview > div.move-up,
+	&:last-of-type .preview > div.move-down {
+		&, &:hover {
+			cursor: default !important;
+			color: #d5d5d5 !important;
+		}
+	}
+
+	.fields {
+		padding: 10px;
+		line-height: 0.5;
+		box-sizing: border-box;
+	}
+}
