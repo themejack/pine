@@ -255,13 +255,12 @@ function pine_contribute_metabox() {
 function pine_newsletter_metabox() {
 	?>
 	<form action="//themejack.us3.list-manage.com/subscribe/post?u=4cb93458932f8621f1d708c6b&amp;id=747bf242f3" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-		<div id="mc_embed_signup_scroll">
-			<label for="mce-EMAIL">Subscribe to our mailing list</label>
-			<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-			<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-			<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_4cb93458932f8621f1d708c6b_747bf242f3" tabindex="-1" value=""></div>
-			<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-		</div>
+		<input type="email" value="" name="EMAIL" class="regular-text ltr" id="mce-EMAIL" placeholder="put your email address here" required>
+
+		<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_4cb93458932f8621f1d708c6b_747bf242f3" tabindex="-1" value=""></div>
+
+		<br>
+		<input type="submit" value="Subscribe" name="subscribe" id="mc-subscribe-button" class="button button-secondary">
 	</form>
 	<?php
 }
@@ -296,8 +295,8 @@ function pine_admin_page() {
 	add_meta_box( 'pine_customize', __( 'Customize', 'pine' ), 'pine_customize_metabox', $screen->id, 'normal' );
 	add_meta_box( 'pine_child_theme', __( 'Child theme', 'pine' ), 'pine_child_theme_metabox', $screen->id, 'normal' );
 	add_meta_box( 'pine_contribute', __( 'Contribute to Pine', 'pine' ), 'pine_contribute_metabox', $screen->id, 'normal' );
+	add_meta_box( 'pine_newsletter', __( 'Subscribe to our mailing list', 'pine' ), 'pine_newsletter_metabox', $screen->id, 'side', 'high' );
 	add_meta_box( 'dashboard_slicejack', __( 'Slicejack News', 'pine' ), 'pine_sj_dashboard_widget', $screen->id, 'side', 'high' );
-	add_meta_box( 'pine_newsletter', __( 'Newsletter', 'pine' ), 'pine_newsletter_metabox', $screen->id, 'side', 'high' );
 	?>
 	<div class="wrap" id="pine-wrap">
 		<h1 class="page-title"><?php esc_html_e( 'Pine', 'pine' ); ?> <sup class="version">1.0.6</sup></h1>

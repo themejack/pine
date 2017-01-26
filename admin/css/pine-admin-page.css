@@ -86,6 +86,9 @@
   visibility: hidden;
   height: 20px;
 }
+#pine-wrap #mc-subscribe-button {
+  margin-top: 5px;
+}
 @media only screen and (min-width: 1500px) and (max-width: 1800px) {
   #wpbody-content #pine-wrap #dashboard-widgets #postbox-container-1 {
     width: 49.5%;
