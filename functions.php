@@ -193,6 +193,11 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/jetpack.php';
 
 /**
+ * Pine Notifications
+ */
+require get_template_directory() . '/inc/notifications.php';
+
+/**
  * Pine Admin Page
  */
 require get_template_directory() . '/inc/admin-page.php';

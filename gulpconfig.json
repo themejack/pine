@@ -99,6 +99,9 @@
                 ],
                 "source/admin/js/pine-less.js": [
                     "admin/js"
+                ],
+                "source/admin/js/pine-notifications.js": [
+                  "admin/js"
                 ]
             }
         }

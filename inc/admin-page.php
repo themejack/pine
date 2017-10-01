@@ -5,7 +5,7 @@
  * @package Pine
  */
 
-/** Load WordPress dashboard API */
+// Load WordPress dashboard API.
 require_once( ABSPATH . 'wp-admin/includes/dashboard.php' );
 
 /**
@@ -45,10 +45,63 @@ add_action( 'admin_enqueue_scripts', 'pine_admin_page_scripts', 10, 1 );
  */
 function pine_welcome_metabox() {
 	?>
-	<p><?php printf( esc_html__( 'Glad to see you here. To start you can read our introduction blog post %1$s. If you are looking for documentation you can find it on %2$s, also our code is very well documented.', 'pine' ), '<a href="http://slicejack.com/pine-free-minimalist-wordpress-portfolio-theme" target="_blank">' . esc_html__( 'here', 'pine' ) . '</a>', '<a href="https://github.com/themejack/pine" target="_blank">' . esc_html__( 'GitHub', 'pine' ) . '</a>' ); ?></p>
-	<p class="github-buttons"><a class="github-button" href="https://github.com/themejack" data-count-href="/themejack/followers" data-count-api="/users/themejack#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @themejack on GitHub">Follow @themejack</a> <a class="github-button" href="https://github.com/themejack/pine" data-icon="octicon-star" data-count-href="/themejack/pine/stargazers" data-count-api="/repos/themejack/pine#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star themejack/pine on GitHub">Star</a>
+	<p>
+	<?php
+	printf(
+		// translators: %1$s is a blog post link and %2$s is a link to github repository.
+		esc_html__( 'Glad to see you here. To start you can read our introduction blog post %1$s. If you are looking for documentation you can find it on %2$s, also our code is very well documented.', 'pine' ),
+		'<a href="http://slicejack.com/pine-free-minimalist-wordpress-portfolio-theme" target="_blank">' . esc_html__( 'here', 'pine' ) . '</a>',
+		'<a href="https://github.com/themejack/pine" target="_blank">' . esc_html__( 'GitHub', 'pine' ) . '</a>'
+	);
+
+	// translators: %s is a GitHub username.
+	$follow_aria_label = sprintf( __( 'Follow %s on GitHub', 'pine' ), '@themejack' );
+	// translators: %is is a number of GitHub followers.
+	$follow_count_aria_label = sprintf( __( '%s followers on GitHub', 'pine' ), '#' );
+
+	// translators: %s is a GitHub repo name.
+	$star_aria_label = sprintf( __( 'Star %s on GitHub', 'pine' ), 'themejack/pine' );
+	// translators: %is is a number of GitHub stargazers.
+	$star_count_aria_label = sprintf( __( '%s stargazers on GitHub', 'pine' ), '#' );
+	?>
+	</p>
+	<p class="github-buttons">
+		<a
+			class="github-button"
+			href="https://github.com/themejack"
+			data-count-href="/themejack/followers"
+			data-count-api="/users/themejack#followers"
+			data-count-aria-label="<?php echo esc_attr( $follow_count_aria_label ); ?>"
+			aria-label="<?php echo esc_attr( $follow_aria_label ); ?>">
+			<?php
+			// translators: %s is a GitHub username.
+			printf( esc_html__( 'Follow %s', 'pine' ), '@themejack' );
+			?>
+		</a>
+		<a
+			class="github-button"
+			href="https://github.com/themejack/pine"
+			data-icon="octicon-star"
+			data-count-href="/themejack/pine/stargazers"
+			data-count-api="/repos/themejack/pine#stargazers_count"
+			data-count-aria-label="<?php echo esc_attr( $star_count_aria_label ); ?>"
+			aria-label="<?php echo esc_attr( $star_aria_label ); ?>">
+			<?php esc_html_e( 'Star', 'pine' ); ?>
+		</a>
 	</p>
 	<?php
+}
+
+/**
+ * Notifications metabox.
+ *
+ * @since  1.1.0
+ * @return void
+ */
+function pine_notifications_metabox() {
+	$notifications = Pine_Notifications::get_instance();
+
+	$notifications->display_all();
 }
 
 /**
@@ -56,7 +109,19 @@ function pine_welcome_metabox() {
  */
 function pine_customize_metabox() {
 	?>
-	<p><?php printf( esc_html__( 'Theme customization never been easier. Try %s.', 'pine' ), '<a href="' . esc_url( add_query_arg( array( 'return' => urlencode( 'themes.php/?page=pine' ) ), admin_url( '/customize.php' ) ) ) . '">' . esc_html__( 'customizer', 'pine' ) . '</a>' ); ?></p>
+	<p>
+	<?php
+	printf(
+		// translators: %s is a link to Customizer page.
+		esc_html__( 'Theme customization never been easier. Try %s.', 'pine' ),
+		'<a href="' .
+			esc_url( add_query_arg( array(
+				'return' => rawurlencode( 'themes.php/?page=pine' ),
+			), admin_url( '/customize.php' ) ) ) .
+		'">' . esc_html__( 'customizer', 'pine' ) . '</a>'
+	);
+	?>
+	</p>
 <?php
 }
 
@@ -65,8 +130,41 @@ function pine_customize_metabox() {
  */
 function pine_child_theme_metabox() {
 	?>
-	<p><?php printf( esc_html__( 'Want to make more customizations? We prepared child theme for you. Fork it on %s and create custom child theme.', 'pine' ), '<a href="https://github.com/themejack/pine-child" target="_blank">' . esc_html__( 'GitHub', 'pine' ) . '</a>' ); ?></p>
-	<p class="github-buttons"><a class="github-button" href="https://github.com/themejack/pine-child/fork" data-icon="octicon-repo-forked" data-count-href="/themejack/pine-child/network" data-count-api="/repos/themejack/pine-child#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork themejack/pine-child on GitHub">Fork</a> <a class="github-button" href="https://github.com/themejack/pine-child/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download themejack/pine-child on GitHub">Download child theme</a>
+	<p>
+	<?php
+	printf(
+		// translators: %s is a link to GitHub repository.
+		esc_html__( 'Want to make more customizations? We prepared child theme for you. Fork it on %s and create custom child theme.', 'pine' ),
+		'<a href="https://github.com/themejack/pine-child" target="_blank">' . esc_html__( 'GitHub', 'pine' ) . '</a>'
+	);
+	?>
+	</p>
+	<?php
+	// translators: %s is a name of GitHub repository.
+	$fork_aria_label = sprintf( __( 'Fork %s on GitHub', 'pine' ), 'themejack/pine-child' );
+	// translators: %s is a number of GitHub forks.
+	$fork_count_aria_label = sprintf( __( '%s forks on GitHub', 'pine' ), '#' );
+	// translators: %s is a name of GitHub repository.
+	$download_aria_label = sprintf( __( 'Download %s on GitHub', 'pine' ), 'themejack/pine-child' )
+	?>
+	<p class="github-buttons">
+		<a
+			class="github-button"
+			href="https://github.com/themejack/pine-child/fork"
+			data-icon="octicon-repo-forked"
+			data-count-href="/themejack/pine-child/network"
+			data-count-api="/repos/themejack/pine-child#forks_count"
+			data-count-aria-label="<?php echo esc_attr( $fork_count_aria_label ); ?>"
+			aria-label="<?php echo esc_attr( $fork_aria_label ); ?>">
+			<?php esc_html_e( 'Fork', 'pine' ); ?>
+		</a>
+		<a
+			class="github-button"
+			href="https://github.com/themejack/pine-child/archive/master.zip"
+			data-icon="octicon-cloud-download"
+			aria-label="<?php echo esc_attr( $download_aria_label ); ?>">
+			<?php esc_html_e( 'Download child theme', 'pine' ); ?>
+		</a>
 	</p>
 <?php
 }
@@ -123,7 +221,7 @@ function pine_sj_dashboard_widget_output( $widget_id, $feed ) {
 	<div class="rss-widget">
 		<?php pine_sj_widget_rss_output( $feed['url'], $feed ); ?>
 		<div style="display: block; text-align: center; margin-top: 30px;">
-			<a href="<?php echo esc_url( 'http://slicejack.com/blog/' ); ?>" style="display: inline-block; width: 150px; height: 32px; line-height: 32px; color: #777; border: solid 1px #777; border-radius: 2px; text-align: center; text-decoration: none; font-size: 13px;"><?php esc_html_e( 'Read more posts', 'pine' ) ?></a>
+			<a href="<?php echo esc_url( 'http://slicejack.com/blog/' ); ?>" style="display: inline-block; width: 150px; height: 32px; line-height: 32px; color: #777; border: solid 1px #777; border-radius: 2px; text-align: center; text-decoration: none; font-size: 13px;"><?php esc_html_e( 'Read more posts', 'pine' ); ?></a>
 		</div>
 	</div>
 	<?php
@@ -149,12 +247,28 @@ function pine_sj_widget_rss_output( $rss, $args = array() ) {
 
 	if ( is_wp_error( $rss ) ) {
 		if ( is_admin() || current_user_can( 'manage_options' ) ) {
-			echo '<p>' . wp_kses( sprintf( __( '<strong>RSS Error</strong>: %s', 'pine' ), $rss->get_error_message() ), array( 'strong' => array() ) ) . '</p>';
+			echo '<p>' .
+				wp_kses(
+					sprintf(
+						// translators: %s is an error message.
+						__( '<strong>RSS Error</strong>: %s', 'pine' ),
+						$rss->get_error_message()
+					),
+					array(
+						'strong' => array(),
+					)
+				) .
+			'</p>';
 		}
 		return;
 	}
 
-	$default_args = array( 'show_author' => 0, 'show_date' => 0, 'show_summary' => 0, 'items' => 0 );
+	$default_args = array(
+		'show_author'  => 0,
+		'show_date'    => 0,
+		'show_summary' => 0,
+		'items'        => 0,
+	);
 	$args = wp_parse_args( $args, $default_args );
 
 	$items = (int) $args['items'];
@@ -241,10 +355,77 @@ function pine_sj_widget_rss_output( $rss, $args = array() ) {
  */
 function pine_contribute_metabox() {
 	?>
-	<p><?php printf( esc_html__( 'Found a bug? Create a %s.', 'pine' ), '<a href="https://github.com/themejack/pine/issues" target="_blank">' . esc_html__( 'new issue', 'pine' ) . '</a>' ); ?><br />
-	<?php printf( esc_html__( 'Want to resolve an issue or create a new feature? Make a %s.', 'pine' ), '<a href="https://github.com/themejack/pine/pulls" target="_blank">' . esc_html__( 'pull request', 'pine' ) . '</a>' ); ?><br />
-	<?php printf( esc_html__( 'For everything else %s.', 'pine' ), '<a href="https://github.com/themejack/pine" target="_blank">' . esc_html__( 'Github', 'pine' ) . '</a>' ); ?></p>
-	<p class="github-buttons"><a class="github-button" href="https://github.com/themejack/pine" data-icon="octicon-eye" data-count-href="/themejack/pine/watchers" data-count-api="/repos/themejack/pine#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch themejack/pine on GitHub">Watch</a> <a class="github-button" href="https://github.com/themejack/pine/issues" data-icon="octicon-issue-opened" data-count-api="/repos/themejack/pine#open_issues_count" data-count-aria-label="# issues on GitHub" aria-label="Issue themejack/pine on GitHub">Issue</a> <a class="github-button" href="https://github.com/themejack/pine/fork" data-icon="octicon-repo-forked" data-count-href="/themejack/pine/network" data-count-api="/repos/themejack/pine#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork themejack/pine on GitHub">Fork</a>
+	<p>
+	<?php
+	printf(
+		// translators: %s is a link to GitHub create an issue form.
+		esc_html__( 'Found a bug? Create a %s.', 'pine' ),
+		'<a href="https://github.com/themejack/pine/issues" target="_blank">' . esc_html__( 'new issue', 'pine' ) . '</a>'
+	);
+	?>
+	<br />
+	<?php
+	printf(
+		// translators: %s is a link to GitHub create a pull request form.
+		esc_html__( 'Want to resolve an issue or create a new feature? Make a %s.', 'pine' ),
+		'<a href="https://github.com/themejack/pine/pulls" target="_blank">' . esc_html__( 'pull request', 'pine' ) . '</a>'
+	);
+	?>
+	<br />
+	<?php
+	printf(
+		// translators: %s is a link to GitHub repository.
+		esc_html__( 'For everything else %s.', 'pine' ),
+		'<a href="https://github.com/themejack/pine" target="_blank">' . esc_html__( 'Github', 'pine' ) . '</a>'
+	);
+	?>
+	</p>
+	<?php
+	// translators: %s is a name of GitHub repository.
+	$watch_aria_label = sprintf( __( 'Watch %s on GitHub', 'pine' ), 'themejack/pine' );
+	// translators: %s is a number of GitHub watchers.
+	$watch_count_aria_label = sprintf( __( '%s watchers on GitHub', 'pine' ), '#' );
+
+	// translators: %s is a name of GitHub repository.
+	$issue_aria_label = sprintf( __( 'Issue %s on GitHub', 'pine' ), 'themejack/pine' );
+	// translators: %s is a number of GitHub issues.
+	$issue_count_aria_label = sprintf( __( '%s issues on GitHub', 'pine' ), '#' );
+
+	// translators: %s is a name of GitHub repository.
+	$fork_aria_label = sprintf( __( 'Fork %s on GitHub', 'pine' ), 'themejack/pine' );
+	// translators: %s is a number of GitHub forks.
+	$fork_count_aria_label = sprintf( __( '%s forks on GitHub', 'pine' ), '#' );
+	?>
+	<p class="github-buttons">
+		<a
+			class="github-button"
+			href="https://github.com/themejack/pine"
+			data-icon="octicon-eye"
+			data-count-href="/themejack/pine/watchers"
+			data-count-api="/repos/themejack/pine#subscribers_count"
+			data-count-aria-label="<?php echo esc_attr( $watch_count_aria_label ); ?>"
+			aria-label="<?php echo esc_attr( $watch_aria_label ); ?>">
+			<?php esc_html_e( 'Watch', 'pine' ); ?>
+		</a>
+		<a
+			class="github-button"
+			href="https://github.com/themejack/pine/issues"
+			data-icon="octicon-issue-opened"
+			data-count-api="/repos/themejack/pine#open_issues_count"
+			data-count-aria-label="<?php echo esc_attr( $issue_count_aria_label ); ?>"
+			aria-label="<?php echo esc_attr( $issue_aria_label ); ?>">
+			<?php esc_html_e( 'Issue', 'pine' ); ?>
+		</a>
+		<a
+			class="github-button"
+			href="https://github.com/themejack/pine/fork"
+			data-icon="octicon-repo-forked"
+			data-count-href="/themejack/pine/network"
+			data-count-api="/repos/themejack/pine#forks_count"
+			data-count-aria-label="<?php echo esc_attr( $fork_count_aria_label ); ?>"
+			aria-label="<?php echo esc_attr( $fork_aria_label ); ?>">
+			<?php esc_html_e( 'Fork', 'pine' ); ?>
+		</a>
 	</p>
 	<?php
 }
@@ -281,7 +462,9 @@ function pine_admin_page() {
 			window.location = '<?php echo esc_url( admin_url( 'themes.php?page=pine' ) ); ?>';
 			/* jshint ignore:end */
 		</script>
-		<?php // Add anchore for situations when javascript is disabled. ?>
+		<?php
+		// Add anchor for users with javascript disabled in browser.
+		?>
 		<div class="wrap">
 			<a href="<?php echo esc_url( admin_url( 'themes.php?page=pine' ) ); ?>"><?php esc_html_e( 'Click here', 'pine' ); ?></a>
 		</div>
@@ -292,6 +475,7 @@ function pine_admin_page() {
 	$screen = get_current_screen();
 
 	add_meta_box( 'pine_welcome', __( 'Welcome', 'pine' ), 'pine_welcome_metabox', $screen->id, 'normal' );
+	add_meta_box( 'pine_notifications', __( 'Notifications', 'pine' ), 'pine_notifications_metabox', $screen->id, 'normal' );
 	add_meta_box( 'pine_customize', __( 'Customize', 'pine' ), 'pine_customize_metabox', $screen->id, 'normal' );
 	add_meta_box( 'pine_child_theme', __( 'Child theme', 'pine' ), 'pine_child_theme_metabox', $screen->id, 'normal' );
 	add_meta_box( 'pine_contribute', __( 'Contribute to Pine', 'pine' ), 'pine_contribute_metabox', $screen->id, 'normal' );
@@ -299,7 +483,7 @@ function pine_admin_page() {
 	add_meta_box( 'dashboard_slicejack', __( 'Slicejack News', 'pine' ), 'pine_sj_dashboard_widget', $screen->id, 'side', 'high' );
 	?>
 	<div class="wrap" id="pine-wrap">
-		<h1 class="page-title"><?php esc_html_e( 'Pine', 'pine' ); ?> <sup class="version">1.0.9</sup></h1>
+		<h1 class="page-title"><?php esc_html_e( 'Pine', 'pine' ); ?> <sup class="version">1.1.0</sup></h1>
 		<div id="dashboard-widgets-wrap">
 			<div id="dashboard-widgets" class="metabox-holder columns-2">
 				<div id="postbox-container-1" class="postbox-container">
