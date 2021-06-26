@@ -6,14 +6,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Themejack <support@themejack.com>\n"
+"Last-Translator: Themejack <support@themejack.com>\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/pine\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/pine\n"
-"Last-Translator: Themejack <support@themejack.com>\n"
-"Language-Team: Themejack <support@themejack.com>\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 404.php:15
@@ -75,6 +75,10 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
+#: projects-list.php:3
+msgid "Projects list"
+msgstr ""
+
 #: projects-list.php:54
 msgid "All"
 msgstr ""
@@ -102,6 +106,7 @@ msgstr ""
 msgid "Back to homepage"
 msgstr ""
 
+#. translators: %1$s is a blog post link and %2$s is a link to github repository.
 #: inc/admin-page.php:52
 msgid "Glad to see you here. To start you can read our introduction blog post %1$s. If you are looking for documentation you can find it on %2$s, also our code is very well documented."
 msgstr ""
@@ -114,22 +119,27 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
+#. translators: %s is a GitHub username.
 #: inc/admin-page.php:58
 msgid "Follow %s on GitHub"
 msgstr ""
 
+#. translators: %is is a number of GitHub followers.
 #: inc/admin-page.php:60
 msgid "%s followers on GitHub"
 msgstr ""
 
+#. translators: %s is a GitHub repo name.
 #: inc/admin-page.php:63
 msgid "Star %s on GitHub"
 msgstr ""
 
+#. translators: %is is a number of GitHub stargazers.
 #: inc/admin-page.php:65
 msgid "%s stargazers on GitHub"
 msgstr ""
 
+#. translators: %s is a GitHub username.
 #: inc/admin-page.php:78
 msgid "Follow %s"
 msgstr ""
@@ -138,6 +148,7 @@ msgstr ""
 msgid "Star"
 msgstr ""
 
+#. translators: %s is a link to Customizer page.
 #: inc/admin-page.php:116
 msgid "Theme customization never been easier. Try %s."
 msgstr ""
@@ -146,18 +157,24 @@ msgstr ""
 msgid "customizer"
 msgstr ""
 
+#. translators: %s is a link to GitHub repository.
 #: inc/admin-page.php:137
 msgid "Want to make more customizations? We prepared child theme for you. Fork it on %s and create custom child theme."
 msgstr ""
 
+#. translators: %s is a name of GitHub repository.
+#. translators: %s is a name of GitHub repository.
 #: inc/admin-page.php:144, inc/admin-page.php:395
 msgid "Fork %s on GitHub"
 msgstr ""
 
+#. translators: %s is a number of GitHub forks.
+#. translators: %s is a number of GitHub forks.
 #: inc/admin-page.php:146, inc/admin-page.php:397
 msgid "%s forks on GitHub"
 msgstr ""
 
+#. translators: %s is a name of GitHub repository.
 #: inc/admin-page.php:148
 msgid "Download %s on GitHub"
 msgstr ""
@@ -182,6 +199,7 @@ msgstr ""
 msgid "Read more posts"
 msgstr ""
 
+#. translators: %s is an error message.
 #: inc/admin-page.php:254
 msgid "<strong>RSS Error</strong>: %s"
 msgstr ""
@@ -198,6 +216,7 @@ msgstr ""
 msgid "Read more"
 msgstr ""
 
+#. translators: %s is a link to GitHub create an issue form.
 #: inc/admin-page.php:362
 msgid "Found a bug? Create a %s."
 msgstr ""
@@ -206,6 +225,7 @@ msgstr ""
 msgid "new issue"
 msgstr ""
 
+#. translators: %s is a link to GitHub create a pull request form.
 #: inc/admin-page.php:370
 msgid "Want to resolve an issue or create a new feature? Make a %s."
 msgstr ""
@@ -214,6 +234,7 @@ msgstr ""
 msgid "pull request"
 msgstr ""
 
+#. translators: %s is a link to GitHub repository.
 #: inc/admin-page.php:378
 msgid "For everything else %s."
 msgstr ""
@@ -222,18 +243,22 @@ msgstr ""
 msgid "Github"
 msgstr ""
 
+#. translators: %s is a name of GitHub repository.
 #: inc/admin-page.php:385
 msgid "Watch %s on GitHub"
 msgstr ""
 
+#. translators: %s is a number of GitHub watchers.
 #: inc/admin-page.php:387
 msgid "%s watchers on GitHub"
 msgstr ""
 
+#. translators: %s is a name of GitHub repository.
 #: inc/admin-page.php:390
 msgid "Issue %s on GitHub"
 msgstr ""
 
+#. translators: %s is a number of GitHub issues.
 #: inc/admin-page.php:392
 msgid "%s issues on GitHub"
 msgstr ""
@@ -488,6 +513,9 @@ msgctxt "post author"
 msgid "By %s"
 msgstr ""
 
+#. translators: used between list items, there is a space after the comma
+#. translators: used between list items, there is a space after the comma
+#. translators: used between list items, there is a space after the comma
 #: inc/template-tags.php:41, inc/template-tags.php:61, inc/template-tags.php:67
 msgid ", "
 msgstr ""
@@ -520,6 +548,11 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+#. translators: %s: Name of current post.
+#. translators: %s: Name of current post.
+#. translators: %s: Name of current post.
+#. translators: %s: Name of current post.
+#. translators: %s: Name of current post.
 #: template-parts/content-aside.php:20, template-parts/content-chat.php:30, template-parts/content-link.php:21, template-parts/content-status.php:22, template-parts/content.php:26
 msgid "Read more %s"
 msgstr ""
@@ -532,6 +565,14 @@ msgstr ""
 msgid "Nothing Found"
 msgstr ""
 
+#: template-parts/content-none.php:33
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: template-parts/content-none.php:28
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
 #: template-parts/content-none.php:22
 msgid "Ready to publish your first post? %s."
 msgstr ""
@@ -540,22 +581,17 @@ msgstr ""
 msgid "Get started here"
 msgstr ""
 
-#: template-parts/content-none.php:28
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr ""
-
-#: template-parts/content-none.php:33
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr ""
-
+#. translators: %s is a link to the theme.
 #: inc/classes/class-pine-notifications.php:63
 msgid "We are happy to inform you that Pine PRO theme is available for purchase. %s"
 msgstr ""
 
+#. translators: %s is a link to the theme.
 #: inc/classes/class-pine-notifications.php:64, inc/classes/class-pine-notifications.php:74
 msgid "Get it!"
 msgstr ""
 
+#. translators: %s is a link to the theme.
 #: inc/classes/class-pine-notifications.php:68
 msgid "460+ Customizable Design Options, Drag and Drop Page Builder, 800+ Google Fonts and more. %s"
 msgstr ""

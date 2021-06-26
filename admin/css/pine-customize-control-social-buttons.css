@@ -19,7 +19,8 @@
   border-color: #999;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .customize-control-social-buttons .social-buttons .social-button .preview > div {
@@ -179,5 +180,6 @@
 .customize-control-social-buttons .social-buttons .social-button .fields {
   padding: 10px;
   line-height: 0.5;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
