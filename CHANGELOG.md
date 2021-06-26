@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.1] - 2021-06-26
+### Fixed
+- `post_type_supports` function name typo
+
 ## [1.1.0] - 2017-10-01
 ### Added
 - Notifications
