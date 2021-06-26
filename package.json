@@ -18,7 +18,7 @@
   "author": "Slicejack",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "git+https://git@github.com/gulpjs/gulp.git#4.0",
+    "gulp": "^4.0.2",
     "gulp-include": "^2.3.1",
     "gulp-less": "^3.3.0",
     "gulp-notify": "^2.2.0",
